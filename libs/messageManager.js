@@ -149,7 +149,7 @@ class msgManager {
                 return;
             }
             extra1 = '<span class="changeColor">'
-            extra2 = '- Admininstrador&#10003;</span>';
+            extra2 = ' - Admininstrador&#10003;</span>';
         }
         else // if not admin, prevent HTML
         {
