@@ -1,0 +1,114 @@
+html, body
+{
+    padding: 0px;
+    margin: 0px;
+}
+
+body
+{
+    width: 100vw;
+    height: 100vh;
+}
+
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+.loading-anim
+{
+    -webkit-animation:spin 1s linear infinite;
+    -moz-animation:spin 1s linear infinite;
+    animation:spin 10s linear infinite;
+    position: absolute;
+    left: calc(50% - 40px);
+    top: calc(50% - 40px);
+    z-index: 10000;
+    filter: none !important;
+}
+
+.loading
+{
+    /*background-size: 25%;*/
+    width: 100vw;
+    height: 100vh;
+    padding: 0px;
+    margin: 0px;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(5px);
+    display: inline-block;
+
+}
+
+.loading > .block
+{
+    display: block;
+    background-color: rgba(220,220,220, 0.1);
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100vw;
+    height: 100vh;
+}
+
+.msg-area
+{
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    height: 50px;
+    line-height: 50px;
+    background-color: white;
+}
+
+#msg
+{
+    outline: none;
+    border: none;
+    height: 100%;
+    margin: 0px;
+    float: left;
+    width: calc(100% - 100px);
+    height: 100%;
+}
+
+#msg:focus
+{
+    background-color: none;
+    border: none;
+    outline: none;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+.send-btn
+{
+    box-shadow: none;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    float: right;
+    width: 50px;
+    height: 100%;
+    border: none 0px;
+    border-style: none;
+    border-width: 0px;
+    border-color: rgba(0,0,0,0);
+    border-radius: 0px;
+    background-color: rgba(255,255,255,0);
+}
+
+.img-send
+{
+  background-image: url("img/send.png");
+  background-size: 70%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.msg-display
+{
+    padding: 5px;
+    padding-left: 10px;
+    width: 100%;
+    height: calc(100% - 80px - 50px);
+    overflow-y: scroll;
+    max-width: 100vw;
+}

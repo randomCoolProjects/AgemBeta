@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html style="background: none;">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AgemChat Marketplace</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body style="background: none; overflow-y: auto">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Enviar tema | AgemChat</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <button onclick="logout();" class="nav-item btn btn-link">Log-out</button>
+                <a class="nav-item nav-link disabled">v1.5.3</a>
+                <a class="nav-item nav-link" href="index.html"><span class="btn round">Ir para o chat</span></a>
+                <a class="nav-item nav-link" href="theme_docs.html"><span class="btn round">Documentação</span></a>
+                <div class="nav-item">
+                    <a class="nav-item nav-link disabled"
+                        style="font-size: 9px; color: red; margin: 0px; width: 100%; display: inline-block; cursor: pointer;"
+                        onclick="localStorage.clear();" href="theme_upload.html">
+                        Estou com problemas/limpar cache
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div style="width: 100%; padding: 30px;">
+    <h1 style="width: 100%; text-align: center;">ATENÇÃO!</h1>
+    <h3>
+        Somente desenvolvedores podem enviar temas.
+        Se você não sabe CSS, isso não é para você.
+        Enviar algum tipo de <em>malware</em> irá
+        resultar em banimento permanentemente!
+    </h3>
+    </div>
+    <hr>
+    <div style="width: 100%; padding: 20px;">
+            <div class="form-signin">
+            <span id="reauth-email" class="reauth-email"></span>
+            <input type="text" id="inputThemeName" class="form-control" placeholder="My cool theme!" required>
+            <input type="text" id="inputUrl" class="form-control" placeholder="https://something/themeDir/" required onkeypress="if(event.keyCode==13)$('.btn').click();">
+            <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" onclick="uploadTheme();">Enviar tema</button>
+        </div>
+</body>
+</html>
