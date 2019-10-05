@@ -1,4 +1,4 @@
-const ROOT = '/firebase/';
+const ROOT = '/beta/';
 const MSGPATH = ROOT + 'msg/';
 const BANPATH = ROOT + 'banned/'
 
