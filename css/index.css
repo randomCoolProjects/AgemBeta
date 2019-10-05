@@ -1,0 +1,69 @@
+textarea:hover,
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
+input:focus,
+button,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active,
+.btn
+{
+    border-width: 0px;
+    border: 0px none !important;
+    outline:0px !important;
+    -webkit-appearance:none;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    box-shadow: inset 0 -1px 0 #ddd;
+}
+
+.round
+{
+    border-radius: 10px;
+    padding-left: 3px;
+    padding-right: 3px;
+
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.not-allowed
+{
+    cursor: not-allowed;
+}
+
+@keyframes changeColor-anim
+{
+    0%
+    {
+        color: black;
+    }
+    25%
+    {
+        color: blue;
+    }
+    50%
+    {
+        color: orangered;
+    }
+    75%
+    {
+        color: purple;
+    }
+    100%
+    {
+        color: green;
+    }
+}
+
+.changeColor
+{
+    animation-name: changeColor-anim;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+}

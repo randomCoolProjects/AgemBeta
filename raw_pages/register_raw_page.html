@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+    <div class="container">
+        <div class="card card-container">
+            <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+            <p id="profile-name" class="profile-name-card"></p>
+            <div class="form-signin">
+                <span id="reauth-email" class="reauth-email"></span>
+                <input type="text" id="inputName" class="form-control" placeholder="Nome" required autofocus>
+                <input type="email" id="inputEmail" class="form-control" placeholder="Endereço de email" required>
+                <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required>
+                <input type="password" id="repeatPassword" class="form-control" placeholder="Repetir senha" required onkeypress="if(event.keyCode==13)$('.btn').click();">
+                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" onclick="register();">Registrar</button>
+            </div>
+            Já tem uma conta?&nbsp;
+            <a href="login.html" class="link-other">
+                Log-in
+            </a>
+            <a style="font-size: 9px; color: red; margin: 0px; width: 100%; display: inline-block; cursor: pointer;"
+            onclick="localStorage.clear();" href="register.html">
+                    Estou com problemas/limpar cache
+            </a>
+        </div><!-- /card-container -->
+    </div><!-- /container -->
+</body>
+<script>
+    GoogleFirebase.OnUserAuth = function()
+    {
+        window.location = "index.html";
+        /*window.setTimeout(function(){
+            window.location = "index.html";
+        }, 1000);*/
+    }
+    function register()
+    {
+        var name = $("#inputName").val();
+        var email = $("#inputEmail").val();
+        var pass = $("#inputPassword").val();
+        var repass = $("#repeatPassword").val();
+
+        if (name.length < 4)
+        {
+            swal({
+            title: "Erro",
+            text: "Insira um nome válido!",
+            icon: "error",
+            dangerMode: true,
+            });
+            return;
+        }
+        if (email.length <= 4 || !email.includes('@') || !email.includes('.'))
+        {
+            swal({
+            title: "Erro",
+            text: "Email inválido.",
+            icon: "error",
+            dangerMode: true,
+            });
+            return;
+        }
+        if (pass != repass)
+        {
+            swal({
+            title: "Erro",
+            text: "As senhas não correspondem.",
+            icon: "error",
+            dangerMode: true,
+            });
+            return;
+        }
+
+        GoogleFirebase.Register
+            (
+             email,
+             pass,
+             name
+             );
+
+             window.setTimeout(function () {
+            if (GoogleFirebase.Errored) {
+                if (GoogleFirebase.Error.indexOf('auth/email-already-in-use') != -1)
+                {
+                    swal({
+                    title: "Erro",
+                    text: "Já existe uma conta registrada com este email.",
+                    icon: "error",
+                    //buttons: true,
+                    dangerMode: true,
+                })
+                    .then((ok) => {
+                        location.reload();
+                    });
+                    return;
+                }
+                swal({
+                    title: "Erro",
+                    text: "Erro desconhecido: " + GoogleFirebase.Error,
+                    icon: "error",
+                    //buttons: true,
+                    dangerMode: true,
+                })
+                    .then((ok) => {
+                        location.reload();
+                    });
+            }
+        }, 1000);
+    }
+</script>
+</html>

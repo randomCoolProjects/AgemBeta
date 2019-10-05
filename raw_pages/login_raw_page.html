@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="card card-container">
+            <img id="profile-img" class="profile-img-card" src="img/avatar.png" />
+            <p id="profile-name" class="profile-name-card"></p>
+            <div class="form-signin">
+                <span id="reauth-email" class="reauth-email"></span>
+                <input type="email" id="inputEmail" class="form-control" placeholder="Endereço de email" required autofocus>
+                <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required onkeypress="if(event.keyCode==13)$('.btn').click();">
+                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" onclick="login();">Log-in</button>
+            </div>
+            Não tem uma conta?&nbsp;
+            <a href="register.html" class="link-other">
+                Crie uma
+            </a>
+            <a style="font-size: 9px; color: red; margin: 0px; width: 100%; display: inline-block; cursor: pointer;"
+            onclick="localStorage.clear();" href="login.html">
+                    Estou com problemas/limpar cache
+            </a>
+        </div><!-- /card-container -->
+    </div><!-- /container -->
+</body>
+<script>
+    GoogleFirebase.OnUserAuth = function () {
+        window.location = "index.html";
+    }
+    function login() {
+        GoogleFirebase.Login(
+            $("#inputEmail").val(),
+            $("#inputPassword").val());
+        window.setTimeout(function () {
+            if (GoogleFirebase.Errored) {
+                swal({
+                    title: "Erro",
+                    text: "Ocorreu um erro ao logar-se. Talvez essa conta seja inexistente.",
+                    icon: "error",
+                    //buttons: true,
+                    dangerMode: true,
+                })
+                    .then((ok) => {
+                        location.reload();
+                    });
+            }
+        }, 1000);
+    }
+</script>
+
+</html>
