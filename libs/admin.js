@@ -4,8 +4,6 @@ console.log('WELCOME ADMIN!');
 
 swal('WELCOME ADMIN!');
 
-const sentAudio = new Audio('https://raw.githubusercontent.com/randomCoolProjects/MasterChat/master/sound/sent.wav');
-
 function adminExecScript(script)
 {
     var split = script.split(' ');
