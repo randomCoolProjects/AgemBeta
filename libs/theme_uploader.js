@@ -1,7 +1,7 @@
 function uploadTheme()
 {
     var themeUrl = $('#inputUrl').val();
-    var ThemeObj = LocalResourceCache.HTTPRequest(themeUrl + '/theme.json');
+    var ThemeObj = LocalResourceCache.HTTPRequest(themeUrl + 'theme.json');
     if (!$('#inputThemeName').val() || ThemeObj == null || ThemeObj.length < 4)
     {
         swal({
