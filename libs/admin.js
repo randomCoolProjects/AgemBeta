@@ -4,6 +4,8 @@ console.log('WELCOME ADMIN!');
 
 swal('WELCOME ADMIN!');
 
+const sentAudio = new Audio('https://raw.githubusercontent.com/randomCoolProjects/MasterChat/master/sound/sent.wav');
+
 function adminExecScript(script)
 {
     var split = script.split(' ');
@@ -38,6 +40,48 @@ function adminExecScript(script)
     {
         GoogleFirebase.AddItem(MSGPATH, null);
         GoogleFirebase.AddItem(MSGPATH + '0', {msg :'<span class=\"changeColor\">SERVIDOR&#10003;</span>:</b>&nbsp;MENSAGENS APAGADAS<br>', time: Date.now()});
+    }
+    else if (split[0] == 'kill')
+    {
+      MessageManager.SendMessage(`
+        <style>
+        @keyframes kill
+        {
+          0%{
+            background-color: black;
+          }
+          10%
+          {
+            background-color: white;
+          }
+          20%
+          {
+            background-color: red;
+          }
+          30%
+          {
+            background-color: blue;
+            opacity: .89;
+          }
+          60%
+          {
+            background-color: purple;
+          }
+          70%
+          {
+            background-color: white;
+          }
+          85%
+          {
+            background-color: orange;
+          }
+        }
+        nav{display: none !important;}
+        *{animation-name: kill; animation-iteration-count: infinite; animation-duration: 1s;}
+        .msg-display{animation-name: kill; animation-iteration-count: infinite; animation-duration: .2s;}
+        
+        </style>
+      `);
     }
 }
 
