@@ -12,7 +12,13 @@
 <body>
     <div class="container">
         <div class="card card-container">
-            <img id="profile-img" class="profile-img-card" src="img/avatar.png" />
+            <img id="profile-img" class="profile-img-card" />
+            <script> // Page load script
+                var prof_img = document.querySelector('#profile-img');
+                LocalResourceCache.LoadImage('img/avatar.png', img => {
+                    prof_img.setAttribute('src', img);
+                });
+            </script>
             <p id="profile-name" class="profile-name-card"></p>
             <div class="form-signin">
                 <span id="reauth-email" class="reauth-email"></span>
@@ -25,35 +31,11 @@
                 Crie uma
             </a>
             <a style="font-size: 9px; color: red; margin: 0px; width: 100%; display: inline-block; cursor: pointer;"
-            onclick="localStorage.clear();" href="login.html">
+            onclick="CacheClear();" href="login.html">
                     Estou com problemas/limpar cache
             </a>
         </div><!-- /card-container -->
     </div><!-- /container -->
 </body>
-<script>
-    GoogleFirebase.OnUserAuth = function () {
-        window.location = "index.html";
-    }
-    function login() {
-        GoogleFirebase.Login(
-            $("#inputEmail").val(),
-            $("#inputPassword").val());
-        window.setTimeout(function () {
-            if (GoogleFirebase.Errored) {
-                swal({
-                    title: "Erro",
-                    text: "Ocorreu um erro ao logar-se. Talvez essa conta seja inexistente.",
-                    icon: "error",
-                    //buttons: true,
-                    dangerMode: true,
-                })
-                    .then((ok) => {
-                        location.reload();
-                    });
-            }
-        }, 1000);
-    }
-</script>
 
 </html>

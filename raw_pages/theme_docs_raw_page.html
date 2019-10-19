@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html style="background: none;">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AgemChat Docs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body style="background: none; overflow-y: auto; overflow-x: hidden;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Docs | AgemChat</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <a class="nav-item nav-link disabled">v1.9</a>
+            <a class="nav-item nav-link" href="index.html">Ir para o chat</a>
+            <a class="nav-item nav-link" href="marketplace.html">Marketplace</a>
+            <a onclick="logout();" class="nav-item nav-link" href="#">Log-out</a>
+            <div class="nav-item">
+                <a class="nav-item nav-link disabled"
+                    style="font-size: 9px; color: red; margin: 0px; width: 100%; display: inline-block; cursor: pointer;"
+                    onclick="CacheClear();">
+                    Estou com problemas/limpar cache
+                </a>
+            </div>
+        </div>
+    </nav>
+    <div style="width: 100%; padding: 30px;">
+        <h1 style="width: 100%; text-align: center;">Documentação sobre temas</h1>
+        <hr>
+        <h4>
+            Os demas devem seguir uma estrutura, sendo: <br>
+            <ul>
+                <li>
+                    theme_dir
+                    <ul>
+                        <li>
+                            theme.json
+                        </li>
+                        <li>
+                            icon.png
+                        </li>
+                        <li>
+                            file(s)_to_replace.css
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <br>
+            <em>theme_dir</em>: Diretório contendo os arquivos do tema. (O nome não importa)<br><br>
+            <em>theme_dir/theme.json</em>: Arquivos mais importante. JSON especificando os atributos do tema.<br><br>
+            <em>theme_dir/icon.png</em>: Ícone do tema.<br><br>
+            <em>theme_dir/file(s)_to_replace.css</em>: Pode ser mais de um arquivo CSS.
+            Estes arquivos irão substituir os estilos CSS padrão do AgemChat.<br><br>
+            <hr>
+
+            <a href="test-theme.rar">Este tema</a> é um exemplo simples, que faz a animação "carregando"
+            girar mais devagar.<br><br>
+
+            <h1 style="width: 100%; text-align: center;">Criando um tema</h1>
+            <hr>
+            <h4>
+
+            Para criar um tema você deve:
+            <ul>
+                <li>
+                    Conhecer os estilos CSS do AgemChat, que é open source.
+                    Consulte o <a href="https://github.com/randomCoolProjects/AgemChat/">Github</a>.
+                </li>
+                <li>
+                    Baixar o tema exemplo (citado acima) e veja como funciona.
+                </li>
+                <li>
+                    Ter em mente a estrutura padrão de um tema (muito simples).
+                </li>
+            </ul>
+            <br>
+            </h4>
+
+            <h1 style="width: 100%; text-align: center;">Enviando um tema</h1>
+            <hr>
+            <h4>
+
+            Ao "enviar" ume tema, tenha em mente que o AgemChat não o hospeda,
+            apenas salva a URL do diretório de seu tema. <br>
+            Na página "<a href="theme_upload.html">enviar tema</a>", você verá dois campos:<br>
+            No primeiro, digite o nome do seu tema, no segundo, a URL de seu diretório 
+            (Por exemplo, <em>http://domain/theme-dir/</em>). Após isso, clique em 
+            "Enviar tema".<br>
+            <br>
+            </h4>
+
+            <h1 style="width: 100%; text-align: center;">Considerações finais</h1>
+            <hr>
+            <h4>
+
+            Note que:
+            <ul>
+                <li>O arquivo inteiro é substituído: </li>
+                Se você criou um arquivo que irá atuar no lugar de "main.css", 
+                "main.css" todo será substituído, mesmo se você só mudou um detalhe.
+                <li>Temas inválidos não serão aceitos: </li>
+                Certifique-se que todos os padrões são seguidos, caso contrário,
+                seu tema não será aceito ou será removido posteriormente.
+            </ul>
+        </h4>
+    </div>
+</body>
+
+</html>

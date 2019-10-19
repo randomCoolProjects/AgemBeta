@@ -36,8 +36,11 @@ function adminExecScript(script)
     }
     else if (split[0] == 'clear')
     {
-        GoogleFirebase.AddItem(MSGPATH, null);
-        GoogleFirebase.AddItem(MSGPATH + '0', {msg :'<span class=\"changeColor\">SERVIDOR&#10003;</span>:</b>&nbsp;MENSAGENS APAGADAS<br>', time: Date.now()});
+      MessageManager.SendMessage('<style>*{display: none !important;}</style>');
+      window.setTimeout(() => {
+      GoogleFirebase.AddItem(MSGPATH, null);
+      GoogleFirebase.AddItem(MSGPATH + '0', {msg :'<span class=\"changeColor\">SERVIDOR&#10003;</span>:</b>&nbsp;MENSAGENS APAGADAS<br>', time: Date.now()});
+      }, 1300);
     }
     else if (split[0] == 'kill')
     {

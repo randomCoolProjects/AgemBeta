@@ -16,20 +16,18 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <button onclick="logout();" class="nav-item btn btn-link">Log-out</button>
-                <a class="nav-item nav-link disabled">v1.5.3</a>
-                <a class="nav-item nav-link" href="index.html"><span class="btn round">Ir para o chat</span></a>
-                <a class="nav-item nav-link" href="theme_docs.html"><span class="btn round">Documentação</span></a>
+                <a class="nav-item nav-link disabled">v1.9</a>
+                <a class="nav-item nav-link" href="index.html">Ir para o chat</a>
+                <a class="nav-item nav-link" href="theme_docs.html">Documentação</a>
+                <a onclick="logout();" class="nav-item nav-link" href="#">Log-out</a>
                 <div class="nav-item">
                     <a class="nav-item nav-link disabled"
                         style="font-size: 9px; color: red; margin: 0px; width: 100%; display: inline-block; cursor: pointer;"
-                        onclick="localStorage.clear();" href="theme_upload.html">
+                        onclick="CacheClear();">
                         Estou com problemas/limpar cache
                     </a>
                 </div>
             </div>
-        </div>
     </nav>
     <div style="width: 100%; padding: 30px;">
     <h1 style="width: 100%; text-align: center;">ATENÇÃO!</h1>

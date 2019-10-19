@@ -1,0 +1,11 @@
+# VERSÃO 1.9
+ - [x] Novo nome - Antes "MasterChat", agora "AgemChat".  
+ - [x] É possível existir mais de um perfil administrador.
+ - [x] É possível customizar o app, instalando  temas.
+ - [x] Para desenvolvedores, é possível enviar temas.
+ - [x] Página Marketplace: "*Hub*" contendo todos temas disponíveis para instalação.
+ - [x] Página Documentação: Documentação sobre como são feitos os temas.
+ - [x] Leve formatação de texto: É possível escrever em negrito usando \*[ e ]\*, exemplo: \*[Olá]\* = **Olá**. Além disso, é possível enviar links "*clicáveis*".
+ - [x] Notificação de atualização: Toda vez que chegar uma atualização, você será notificado.
+ - [x] Otimização de software: Ainda mais leve que a versão anterior, economizando processamento, memória RAM e dados móveis (caso não esteja usando Wi-Fi).
+ - [x] Melhorias no sistema de segurança: Você está seguro no AgemChat.

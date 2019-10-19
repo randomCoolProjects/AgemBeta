@@ -1,12 +1,10 @@
-const VERSION = '1.5.3';
-
 var EmKeyboard;
 var emailBanned;
 var bannedBecause;
 var canSendMessages = true;
 
 const loginTimeout = 6500;
-const logoutTimeout = 2000;
+const logoutTimeout = 2250;
 
 var interval;
 
@@ -53,6 +51,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
           bannedBecause = snap.val();
           console.log('Você está banido.');
         }
+
+        CheckForUpdates();
         window.clearInterval(interval);
         windowInterval();
       });

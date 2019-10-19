@@ -12,6 +12,7 @@
   display: inline-block;
   width: 52px;
   height: 30px;
+  margin: 0px !important;
 }
 
 /* Hide default HTML checkbox */

@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Marketplace | AgemChat</a>
@@ -16,18 +17,16 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <button onclick="logout();" class="nav-item btn btn-link">Log-out</button>
-                <a class="nav-item nav-link disabled">v1.5.3</a>
-                <a class="nav-item nav-link" href="index.html"><span class="btn round">Ir para o chat</span></a>
-                <a class="nav-item nav-link" href="theme_upload.html"><span class="btn round">Enviar tema</span></a>
-                <div class="nav-item">
-                    <a class="nav-item nav-link disabled"
-                        style="font-size: 9px; color: red; margin: 0px; width: 100%; display: inline-block; cursor: pointer;"
-                        onclick="localStorage.clear();" href="marketplace.html">
-                        Estou com problemas/limpar cache
-                    </a>
-                </div>
+            <a class="nav-item nav-link disabled">v1.9</a>
+            <a class="nav-item nav-link" href="index.html">Ir para o chat</a>
+            <a class="nav-item nav-link" href="theme_upload.html">Enviar tema</a>
+            <a onclick="logout();" class="nav-item nav-link" href="#">Log-out</a>
+            <div class="nav-item">
+                <a class="nav-item nav-link disabled"
+                    style="font-size: 9px; color: red; margin: 0px; width: 100%; display: inline-block; cursor: pointer;"
+                    onclick="CacheClear();">
+                    Estou com problemas/limpar cache
+                </a>
             </div>
         </div>
     </nav>
@@ -39,4 +38,5 @@
         </div>
     </div>
 </body>
+
 </html>

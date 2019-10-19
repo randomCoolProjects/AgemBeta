@@ -111,7 +111,7 @@ body
     padding: 5px;
     padding-left: 10px;
     width: 100%;
-    height: calc(100% - 80px - 50px);
+    height: calc(100vh - 80px - 50px);
     overflow-y: scroll;
     max-width: 100vw;
 }

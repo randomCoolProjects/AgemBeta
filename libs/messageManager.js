@@ -149,11 +149,16 @@ class msgManager {
                 return;
             }
             extra1 = '<span class="changeColor">'
-            extra2 = ' - Admininstrador&#10003;</span>';
+            extra2 = ' - Administrador&#10003;</span>';
         }
         else // if not admin, prevent HTML
         {
-            Message = htmlEscape(Message);
+            Message = 
+            HtmlFormatter.FormatResources(
+                HtmlFormatter.FormatBasicMessage(
+                    htmlEscape(Message)
+                )
+            );
         }
 
         var msgStr = extra1 + GoogleFirebase.CurrentUser.displayName + extra2 + ':</b>&nbsp;' + Message + '<br>';
