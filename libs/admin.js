@@ -42,47 +42,9 @@ function adminExecScript(script)
       GoogleFirebase.AddItem(MSGPATH + '0', {msg :'<span class=\"changeColor\">SERVIDOR&#10003;</span>:</b>&nbsp;MENSAGENS APAGADAS<br>', time: Date.now()});
       }, 1300);
     }
-    else if (split[0] == 'kill')
+    else if (split[0] == 'img')
     {
-      MessageManager.SendMessage(`
-        <style>
-        @keyframes kill
-        {
-          0%{
-            background-color: black;
-          }
-          10%
-          {
-            background-color: white;
-          }
-          20%
-          {
-            background-color: red;
-          }
-          30%
-          {
-            background-color: blue;
-            opacity: .89;
-          }
-          60%
-          {
-            background-color: purple;
-          }
-          70%
-          {
-            background-color: white;
-          }
-          85%
-          {
-            background-color: orange;
-          }
-        }
-        nav{display: none !important;}
-        *{animation-name: kill; animation-iteration-count: infinite; animation-duration: 1s;}
-        .msg-display{animation-name: kill; animation-iteration-count: infinite; animation-duration: .2s;}
-        
-        </style>
-      `);
+		MessageManager.SendMessage(`<br><img src="${split[1]}" style="width: 60%;"></img>`);
     }
 }
 
