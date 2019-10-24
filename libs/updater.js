@@ -86,10 +86,10 @@ function CheckForUpdates()
                 localStorage.clear();
                 location.reload();
               }
-              else
-              {
-                location.href = 'updates.html';
-              }
+            else
+            {
+            	location.href = 'updates.html';
+            }
             });
         }
     });

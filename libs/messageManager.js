@@ -91,8 +91,7 @@ class msgManager {
         var values = Object.values(value);
 
         if (keys.length <= this.Index) {
-            console.log('buggg');
-            //location.reload();
+            location.reload();
             return;
         }
         for (this.Index = this.Index; this.Index < keys.length; this.Index++) {
