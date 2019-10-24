@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Atualizar | AgemChat</title>
+    <script src="libs/localCache.js"></script>
+    <script src="libs/updater.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"></link>
+    <link rel="stylesheet" href="main.css"></link>
+</head>
+<body>
+    <style>
+    .loading-bar-body
+    {
+        width: 200px;
+        height: 30px;
+        border-radius: 10px;
+        overflow: hidden;
+        border-style: solid;
+        border-width: 1px;
+        border-color: gray;
+        background-color: rgb(228, 228, 228);
+    }
+    .loading-bar-content
+    {
+        float: left;
+        height: 100%;
+        background-color: rgba(0, 225, 255, 0.829);
+    }
+    </style>
+    <center style="margin-top: 40vh;">
+        <h2>Atualizar | AgemChat</h2>
+        <hr>
+        <p id="downloading" class="hidden">Baixando atualização ...</p>
+        <br>
+        <div class="loading-bar-body">
+            <div id="update-load" style="width: 0%;" class="loading-bar-content"></div>
+        </div>
+        <br>
+        <button onclick="update();" class="btn btn-primary">Fazer download</button>
+    </center>
+</body>
+<script>
+    function update(){
+
+    const update_load = document.querySelector('#update-load');
+    const downloading_element = document.querySelector('#downloading');
+
+    downloading_element.classList.remove('hidden');
+
+    DownloadLastUpdate((index, length) => {
+        var perc = index / length * 100;
+        update_load.setAttribute('style', `width: ${perc}%;`)
+        console.log(`Downloaded ${perc}`);
+        if (perc == 100)
+        {
+            localStorage.setItem('total_files', length);
+            window.setTimeout(() => {
+                downloading_element.innerHTML = 'Atualização baixada';
+                swal({
+                title: "Atualização baixada",
+                text: "A atualização foi baixada com sucesso.\nClique OK para ir para o chat.",
+                dangerMode: false,
+                sucess: true,
+                }).then(() => {
+                    location.href = 'index.html';
+                });
+            }, 1000);
+        }
+    });
+}
+</script>
+</html>

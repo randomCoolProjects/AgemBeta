@@ -1,3 +1,4 @@
+var ROOT_URL = '';
 var PageResources = 
 {
     'index.html': {
@@ -28,8 +29,9 @@ var PageResources =
         'main.css': 'style',
         'css/login.css': 'style',
         'https://unpkg.com/sweetalert/dist/sweetalert.min.js': 'script',
-        'https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css': 'style',
         'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js': 'script',
+        'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css': 'style',
+        'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js': 'script',
         'libs/firebase.js': 'script',
         'libs/imageEncoder.js': 'script',
         'libs/login_page.js': 'script',
@@ -39,8 +41,9 @@ var PageResources =
         'main.css': 'style',
         'css/login.css': 'style',
         'https://unpkg.com/sweetalert/dist/sweetalert.min.js': 'script',
-        'https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css': 'style',
         'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js': 'script',
+        'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css': 'style',
+        'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js': 'script',
         'libs/firebase.js': 'script',
         'libs/imageEncoder.js': 'script',
         'libs/register_page.js': 'script',
@@ -119,9 +122,7 @@ var types = Object.values(resources);
 var Index = 0;
 
 for (Index = 0; Index < URLs.length; Index++)
-{
-    LocalResourceCache.LoadResource(URLs[Index], types[Index]);
-}
+    LocalResourceCache.LoadResource(ROOT_URL + URLs[Index], types[Index]);
 
 PageResources = null; // Unload for clearing out memory
 delete PageResources;
