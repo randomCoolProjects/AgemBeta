@@ -234,6 +234,8 @@ function isLetter(str) {
 
 function sensore(item) {
 
+  if (!item) return item;
+
     var result = item;
     for (var i = 0; i < sensored.length; i++) {
         var cens = sensored[i].toLowerCase();

@@ -1,4 +1,4 @@
-const VERSION = '1.9.1';
+const VERSION = '2.0';
 
 var AllResources =
 [
@@ -21,13 +21,17 @@ var AllResources =
     'libs/theme_uploader.js',
     'libs/themeLoader.js',
     'libs/updater.js',
+    'libs/groupManager.js',
+    'libs/firebaseStorage.js',
+    'libs/groupsPage.js',
 
     //css
     'main.css',
     'css/index.css',
     'css/login.css',
-	'css/marketplace.css',
-	'css/menu.css',
+	  'css/marketplace.css',
+    'css/menu.css',
+    'css/groups.css',
     
     //css/elements
     'css/elements/emoji_keyb.css',
@@ -41,17 +45,18 @@ var AllResources =
     'raw_pages/register_raw_page.html',
     'raw_pages/theme_docs_raw_page.html',
     'raw_pages/theme_upload_raw_page.html',
-	'raw_pages/updates_raw_page.html',
+    'raw_pages/updates_raw_page.html',
+    'raw_pages/groups_raw_page.html',
 
-	//audio
-	'audio/notf.base64',
-	'audio/sent.base64',
+    //audio
+    'audio/notf.base64',
+    'audio/sent.base64',
 
-	//third party
-	'https://unpkg.com/sweetalert/dist/sweetalert.min.js',
-	'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js',
-	'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css',
-	'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js'
+    //third party
+    'https://unpkg.com/sweetalert/dist/sweetalert.min.js',
+    'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js',
+    'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css',
+    'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js'
 
 ];
 
@@ -78,7 +83,8 @@ function CheckForUpdates()
             title: 'Nova atualização',
             text: 'Chegou uma nova atualização.\nClique em "Ok" para atualizar o app.\nVersão atual: ' + VERSION + '\nNova versão: ' + updatedVersion,
             dangerMode: false,
-            buttons: ['Por que devo atualizar?', 'Ok']
+            buttons: ['Por que devo atualizar?', 'Ok'],
+            icon: 'info'
           })
             .then((val) => {
               if (val)

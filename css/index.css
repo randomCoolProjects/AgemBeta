@@ -1,27 +1,3 @@
-textarea:hover,
-input:hover,
-textarea:active,
-input:active,
-textarea:focus,
-input:focus,
-button,
-button:focus,
-button:active,
-button:hover,
-label:focus,
-.btn:active,
-.btn.active,
-.btn
-{
-    border-width: 0px;
-    border: 0px none !important;
-    outline:0px !important;
-    -webkit-appearance:none;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
-    box-shadow: inset 0 -1px 0 #ddd;
-}
-
 .round
 {
     border-radius: 10px;

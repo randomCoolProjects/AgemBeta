@@ -21,6 +21,12 @@ function startLoading()
 }
 
 document.addEventListener("DOMContentLoaded", function (event) {
+  {
+    var grp = localStorage.getItem('currentGroup');
+    if (!grp) grp = 'Global';
+    document.title = `${grp} | AgemChat`;
+    document.querySelector('#curr_grp').innerHTML = grp;
+  }
   var _msg_show = false;
   GoogleFirebase.OnUserAuth = function () {
     if (GoogleFirebase.CurrentUser) {

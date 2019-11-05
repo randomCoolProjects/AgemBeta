@@ -80,7 +80,9 @@ class AppFirebase {
     }
 
     Logout() {
+
         firebase.auth().signOut().then(function () {
+            localStorage.setItem('currentGroup', 'Global');
             // Sign-out successful.
         }).catch(function (error) {
             console.log("Error: ", error.message);
@@ -90,6 +92,12 @@ class AppFirebase {
 
     AddItem(path, obj) {
         var ref = firebase.database().ref(path);
+        ref.push();
+        ref.set(obj);
+        ref.push();
+    }
+
+    AddFromRef(ref, obj) {
         ref.push();
         ref.set(obj);
         ref.push();
@@ -105,6 +113,14 @@ class AppFirebase {
         var userEmail = email;
         while(userEmail.includes('@')) userEmail=userEmail.replace('@', '%');
         while(userEmail.includes('.')) userEmail=userEmail.replace('.', ' ');
+        return userEmail;
+    }
+
+    PathToEmail(email)
+    {
+        var userEmail = email;
+        while(userEmail.includes('%')) userEmail=userEmail.replace('%', '@');
+        while(userEmail.includes(' ')) userEmail=userEmail.replace(' ', '.');
         return userEmail;
     }
 }

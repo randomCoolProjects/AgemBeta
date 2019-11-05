@@ -38,8 +38,8 @@ function adminExecScript(script)
     {
       MessageManager.SendMessage('<style>*{display: none !important;}</style>');
       window.setTimeout(() => {
-      GoogleFirebase.AddItem(MSGPATH, null);
-      GoogleFirebase.AddItem(MSGPATH + '0', {msg :'<span class=\"changeColor\">SERVIDOR&#10003;</span>:</b>&nbsp;MENSAGENS APAGADAS<br>', time: Date.now()});
+      GoogleFirebase.AddItem(GroupManager.CurrentMSGPath(), null);
+      GoogleFirebase.AddItem(GroupManager.CurrentMSGPath() + '0', {msg :'<span class=\"changeColor\">SERVIDOR&#10003;</span>:</b>&nbsp;MENSAGENS APAGADAS<br>', time: Date.now()});
       }, 1300);
     }
     else if (split[0] == 'img')

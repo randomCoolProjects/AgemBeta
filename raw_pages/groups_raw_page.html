@@ -6,7 +6,7 @@
     <meta name="description" content="Chat online global gratuito! Entre agora e comece a falar!">
     <meta name="keywords" content="Chat,Global,Bate papo,Gratuito,Social,Pessoas,Interação,Comunicação">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AgemChat</title>
+    <title>Grupos | AgemChat</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="cache-control" content="max-age=0" />
     <meta http-equiv="cache-control" content="no-cache" />
@@ -15,12 +15,10 @@
     <meta http-equiv="pragma" content="no-cache" />
     <link rel="icon" href="favicon.png">
 
-    <script>var adminScript = false;
-    </script>
-
 </head>
 
 <body>
+
     <div class="block"></div>
     <img class="loading-anim" alt="" width="80" height="80">
 
@@ -30,32 +28,23 @@
             anim.setAttribute('src', img);
         });
     </script>
-    
+
     <div id="loading" class="loading">
-        <!--Loading animation and content block-->
 
         <!--Navbar-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">AgemChat&nbsp;|&nbsp<span id="curr_grp"></span></a>
+            <a class="navbar-brand" href="#">AgemChat</a>
             <a class="nav-item nav-link disabled">v1.9.1</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <a class="nav-item nav-link disabled" href="#">Sensurar mensagens:</a>
-                <div class="nav-item nav-link">
-                    <label class="switch">
-                        <input id="sensore-msg" type="checkbox" checked>
-                        <span class="slider round"></span>
-                    </label>
-                </div>
+                <a class="nav-item nav-link" href="index.html">Ir para o chat</a>
                 <a class="nav-item nav-link disabled" href="https://www.loading.io/" target="_blank">
                     Loading animation by loading.io
                 </a>
                 <a class="nav-item nav-link" href="marketplace.html">Instalar Temas</a>
-                <a onclick="logout();" class="nav-item nav-link" href="#">Log-out</a>
-                <a class="nav-item nav-link" href="groups.html">Grupos</a>
                 <div class="nav-item">
                     <a class="nav-item nav-link disabled"
                         style="font-size: 9px; color: red; margin: 0px; width: 100%; display: inline-block; cursor: pointer;"
@@ -67,23 +56,12 @@
         </nav>
         <!--/.Navbar-->
 
-        <div class="emoji-keyb hidden">
+        <div id="groups">
+            
         </div>
 
-        <div id="messages" class="msg-display">
-        </div>
+        <div class="action-btn">+</div>
 
-        <div class="msg-area">
-            <input id="msg" class="form-control not-allowed" type="text" placeholder="Send a mesage ..." readonly
-                autofocus onkeydown="if(event.keyCode == 13){$('#send-msg-btn').click();}" autocomplete="off">
-            <button id="send-msg-btn" class="btn send-btn img-send" onclick="SendMessage();">
-                &nbsp;
-            </button>
-            <button id="send-msg-btn" class="btn send-btn" onclick="if(canSendMessages)EmojiKeyboard();">
-                &#128515;
-            </button>
-        </div>
     </div>
 </body>
-
 </html>

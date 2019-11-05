@@ -69,7 +69,7 @@ class msgManager {
         this.Sensore = true;
         this.Index = 0;
         this.Element = null;
-        this.ref = GoogleFirebase.GetReference(MSGPATH);
+        this.ref = GoogleFirebase.GetReference(GroupManager.CurrentMSGPath());
         this.ref.on('value', snap => {
             var msg = snap.val();
 
@@ -160,8 +160,8 @@ class msgManager {
         var msgStr = extra1 + GoogleFirebase.CurrentUser.displayName + extra2 + ':</b>&nbsp;' + Message + '<br>';
         var id = this.Index;
         // console.log("Sending a new message ", msgStr);
-        GoogleFirebase.AddItem(MSGPATH + id, { msg: msgStr, time: Date.now() });
-        GoogleFirebase.GetReference(MSGPATH).orderByKey();
+        GoogleFirebase.AddItem(GroupManager.CurrentMSGPath() + id, { msg: msgStr, time: Date.now() });
+        this.ref.orderByKey();
     }
 
     Init() {

@@ -17,12 +17,32 @@ var PageResources =
 
         'libs/sensore.js': 'script',
         'libs/firebase.js': 'script',
+        'libs/firebaseStorage.js': 'script',
+        'libs/groupManager.js': 'script',
         'libs/messageManager.js': 'script',
         'libs/emoji_database.js': 'script',
         'libs/updater.js': 'script',
         'libs/htmlFormatter.js': 'script',
         'libs/imageEncoder.js': 'script',
         'libs/index.js': 'script',
+    },
+    'groups.html': {
+        'libs/source_firebase.js': 'script',
+        'https://unpkg.com/sweetalert/dist/sweetalert.min.js': 'script',
+        'main.css': 'style',
+        'css/menu.css': 'style',
+        'css/groups.css': 'style',
+
+        'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js': 'script',
+        'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css': 'style',
+        'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js': 'script',
+
+        'libs/firebase.js': 'script',
+        'libs/firebaseStorage.js': 'script',
+        'libs/groupManager.js': 'script',
+        'libs/imageEncoder.js': 'script',
+        'libs/updater.js': 'script',
+        'libs/groupsPage.js': 'script',
     },
     'login.html': {
         'libs/source_firebase.js': 'script',
