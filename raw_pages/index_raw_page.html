@@ -25,10 +25,9 @@
     <img class="loading-anim" alt="" width="80" height="80">
 
     <script> // Page load script
-        var anim = document.querySelector('.loading-anim');
-        LocalResourceCache.LoadImage('img/loading.png', img => {
-            anim.setAttribute('src', img);
-        });
+        LocalResourceCache.LoadImageToElement('img/loading.png', '.loading-anim');
+        //LOADING ANIMATION BY LOADING.IO
+        console.log('Loading animation by https://loading.io/');
     </script>
     
     <div id="loading" class="loading">
@@ -43,28 +42,18 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <a class="nav-item nav-link disabled" href="#">Sensurar mensagens:</a>
-                <div class="nav-item nav-link">
-                    <label class="switch">
-                        <input id="sensore-msg" type="checkbox" checked>
-                        <span class="slider round"></span>
-                    </label>
-                </div>
-                <a class="nav-item nav-link disabled" href="https://www.loading.io/" target="_blank">
-                    Loading animation by loading.io
-                </a>
-                <a class="nav-item nav-link" href="marketplace.html">Instalar Temas</a>
-                <a onclick="logout();" class="nav-item nav-link" href="#">Log-out</a>
-                <a class="nav-item nav-link" href="groups.html">Grupos</a>
-                <div class="nav-item">
-                    <a class="nav-item nav-link disabled"
-                        style="font-size: 9px; color: red; margin: 0px; width: 100%; display: inline-block; cursor: pointer;"
-                        onclick="CacheClear();">
-                        Estou com problemas/limpar cache
-                    </a>
-                </div>
+                <a class="nav-item nav-link" href="marketplace.html"><img id="add-on" width="32"></a>
+                <a onclick="logout();" class="nav-item nav-link" href="#"><img id="logout-btn" width="32"></a>
+                <a class="nav-item nav-link" href="groups.html"><img id="groups-btn" width="32"></a>
+                <a class="nav-item nav-link disabled" onclick="CacheClear();" href="#"><img id="cache-clear-btn" width="32"></a>
             </div>
         </nav>
+        <script> // Page load script
+            LocalResourceCache.LoadImageToElement('img/add-on.png', '#add-on');
+            LocalResourceCache.LoadImageToElement('img/logout.png', '#logout-btn');
+            LocalResourceCache.LoadImageToElement('img/groups.png', '#groups-btn');
+            LocalResourceCache.LoadImageToElement('img/error-fix.png', '#cache-clear-btn');
+        </script>
         <!--/.Navbar-->
 
         <div class="emoji-keyb hidden">

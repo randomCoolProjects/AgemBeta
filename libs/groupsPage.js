@@ -60,10 +60,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     }
                 }
                 if (isAdmim) {
-                    var script = document.createElement('script');
-                    script.setAttribute('type', 'text/javascript');
-                    script.setAttribute('src', 'libs/admin.js');
-                    document.getElementsByTagName('head')[0].appendChild(script);
+                    LocalResourceCache.LoadResource('libs/admin.js', 'script');
                 }
             });
             ref = GoogleFirebase.GetReference(BANPATH + GoogleFirebase.EmailToPath(currEmail));

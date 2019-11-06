@@ -50,6 +50,14 @@ const LocalResourceCache =
         }
         else
         callback(data);
+    },
+
+    LoadImageToElement: function(imgUrl, querySelector)
+    {
+        var imgE = document.querySelector(querySelector);
+        this.LoadImage(imgUrl, img => {
+                imgE.setAttribute('src', img);
+        });
     }
 }
 

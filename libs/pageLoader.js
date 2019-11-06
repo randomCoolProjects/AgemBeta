@@ -15,7 +15,6 @@ var PageResources =
         'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css': 'style',
         'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js': 'script',
 
-        'libs/sensore.js': 'script',
         'libs/firebase.js': 'script',
         'libs/firebaseStorage.js': 'script',
         'libs/groupManager.js': 'script',
@@ -134,6 +133,8 @@ var PageResources =
 
 var split = (String)(window.location).split('/');
 var currPage = split[split.length-1];
+if(currPage.length <= 1) currPage = 'index.html';
+
 var resources = PageResources[currPage.replace('#', '')];
 
 var URLs = Object.keys(resources);

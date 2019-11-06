@@ -47,21 +47,28 @@
     </center>
 </body>
 <script>
-    function update(){
+    let perc = 0;
+
+    var load_interval = window.setInterval(() => {
+        if (perc <= 0.9) return;
+        update_load.setAttribute('style', `width: ${perc}%;`)
+        if (perc == 100)window.clearInterval(load_interval);
+    }, 100);
 
     const update_load = document.querySelector('#update-load');
     const downloading_element = document.querySelector('#downloading');
 
+    function update(){
+
     downloading_element.classList.remove('hidden');
 
     DownloadLastUpdate((index, length) => {
-        var perc = index / length * 100;
-        update_load.setAttribute('style', `width: ${perc}%;`)
-        console.log(`Downloaded ${perc}`);
+        perc = index / length * 100;
         if (perc == 100)
         {
             localStorage.setItem('total_files', length);
             window.setTimeout(() => {
+                //if (load_interval) window.clearInterval(load_interval);
                 downloading_element.innerHTML = 'Atualização baixada';
                 swal({
                 title: "Atualização baixada",
@@ -74,6 +81,7 @@
             }, 1000);
         }
     });
+
 }
 </script>
 </html>

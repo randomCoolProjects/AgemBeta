@@ -16,7 +16,6 @@ var AllResources =
     'libs/messageManager.js',
     'libs/pageLoader.js',
     'libs/register_page.js',
-    'libs/sensore.js',
     'libs/source_firebase.js',
     'libs/theme_uploader.js',
     'libs/themeLoader.js',
@@ -24,6 +23,7 @@ var AllResources =
     'libs/groupManager.js',
     'libs/firebaseStorage.js',
     'libs/groupsPage.js',
+    'libs/admin.js',
 
     //css
     'main.css',

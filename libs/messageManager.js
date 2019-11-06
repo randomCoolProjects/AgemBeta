@@ -95,9 +95,6 @@ class msgManager {
             return;
         }
         for (this.Index = this.Index; this.Index < keys.length; this.Index++) {
-            if (this.Sensore)
-                var msg = sensore(values[this.Index].msg);
-            else
                 var msg = values[this.Index].msg;
 
             var messageElement = document.createElement('span');

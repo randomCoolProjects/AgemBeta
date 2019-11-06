@@ -44,10 +44,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
           }
         }
         if (isAdmim) {
-          var script = document.createElement('script');
-          script.setAttribute('type', 'text/javascript');
-          script.setAttribute('src', 'libs/admin.js');
-          document.getElementsByTagName('head')[0].appendChild(script);
+          LocalResourceCache.LoadResource('libs/admin.js', 'script');
         }
       });
       ref = GoogleFirebase.GetReference(BANPATH + GoogleFirebase.EmailToPath(currEmail));
@@ -106,21 +103,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
   MessageManager.SetElement('messages');
   MessageManager.Init();
-
-  const toggle = document.querySelector('#sensore-msg');
-  toggle.addEventListener('change', function () {
-    var strval = 'false';
-    if (toggle.checked == true)
-      strval = true;
-    localStorage.setItem('sensore', strval);
-    setTimeout(function () { location.reload(); }, 450);
-  });
-
-  if (localStorage.getItem('sensore')) {
-    var sens = (localStorage.getItem('sensore') == 'true');
-    MessageManager.Sensore = sens;
-    toggle.checked = sens;
-  }
 
   EmKeyboard = document.querySelector('.emoji-keyb');
   KeyboardLoad();
