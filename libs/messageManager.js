@@ -127,7 +127,7 @@ class msgManager {
         this.Element = document.querySelector('#' + element);
     }
 
-    SendMessage(message) {
+    SendMessage(message, allowHtml) {
 
         if (message == '' || message == null || message.length <= 0 || !canSendMessages) return;
 
@@ -144,7 +144,7 @@ class msgManager {
             extra1 = '<span class="changeColor">'
             extra2 = ' - Administrador&#10003;</span>';
         }
-        else // if not admin, prevent HTML
+        else if (!allowHtml) // if not admin, prevent HTML
         {
             Message =
                 HtmlFormatter.FormatResources(

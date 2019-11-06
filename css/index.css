@@ -37,9 +37,38 @@
     }
 }
 
+audio
+{
+    border-radius: 90px;
+    border-width: 0px;
+    background-color: whitesmoke;
+    border-top-left-radius: 0px;
+    outline: none !important;
+    user-select: none;
+}
+
 .changeColor
 {
     animation-name: changeColor-anim;
     animation-duration: 10s;
     animation-iteration-count: infinite;
 }
+
+::-webkit-scrollbar {
+    width: 0px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #ffffff;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #ffffff;
+  }

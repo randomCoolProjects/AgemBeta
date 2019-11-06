@@ -24,6 +24,7 @@ var AllResources =
     'libs/firebaseStorage.js',
     'libs/groupsPage.js',
     'libs/admin.js',
+    'libs/audioRecorder.js',
 
     //css
     'main.css',

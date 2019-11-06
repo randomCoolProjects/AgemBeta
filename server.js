@@ -12,8 +12,10 @@ http.createServer(function (req, res) {
   const parsedUrl = url.parse(req.url);
   // extract URL path
   let pathname = `.${parsedUrl.pathname}`;
+
+
   // based on the URL path, extract the file extention. e.g. .js, .doc, ...
-  const ext = path.parse(pathname).ext;
+  var ext = path.parse(pathname).ext;
   // maps file extention to MIME typere
   const map = {
     '.ico': 'image/x-icon',
@@ -39,7 +41,7 @@ http.createServer(function (req, res) {
     }
 
     // if is a directory search for index file matching the extention
-    if (fs.statSync(pathname).isDirectory()) pathname += '/index' + ext;
+    if (fs.statSync(pathname).isDirectory()){ pathname += '/index' + (ext || '.html'); ext = '.html'}
 
     // read file from file system
     fs.readFile(pathname, function(err, data){

@@ -69,7 +69,7 @@ body
     height: 100%;
     margin: 0px;
     float: left;
-    width: calc(100% - 100px);
+    width: calc(100% - 150px);
     height: 100%;
 }
 
@@ -104,6 +104,40 @@ body
   background-size: 70%;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.img-mic
+{
+    background-image: url("img/microphone.png");
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: all .2s;
+}
+
+@keyframes recording-mic
+{
+    0%
+    {
+        background-size: 60%;
+    }
+    50%
+    {
+        background-size: 85%;
+    }
+    100%
+    {
+        background-size: 60%;
+    }
+}
+
+.recording
+{
+    background-color: gray;
+    animation-name: recording-mic;
+    animation-iteration-count: infinite;
+    animation-duration: 2s;
+
 }
 
 .msg-display
