@@ -90,6 +90,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
             var messageInputElement = document.querySelector('#msg');
             messageInputElement.removeAttribute('readonly');
             messageInputElement.classList.remove('not-allowed');
+            MessageManager.Init();
+
         }
         stopLoading();
     }
@@ -97,13 +99,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
     interval = window.setInterval(windowInterval, loginTimeout);
 
     MessageManager.SetElement('messages');
-    MessageManager.Init();
 
     EmKeyboard = document.querySelector('.emoji-keyb');
     KeyboardLoad();
 });
 
 function SendMessage() {
+    if (AudioRecorder.Recording)
+    {
+        AudioRecorder.StopRecording();
+        return;
+    }
+
     var msg = $("#msg").val();
     $("#msg").val("");
     MessageManager.SendMessage(msg);
@@ -154,6 +161,7 @@ function logout() {
     }, logoutTimeout);
 }
 
+var audioCancel = false;
 AudioRecorder.RequestMic();
 function AudioAction()
 {
@@ -165,13 +173,63 @@ function AudioAction()
     }
     if (AudioRecorder.Recording)
     {
+        //cancel audio
+        audioCancel = true;
         AudioRecorder.StopRecording();
+        audioBtn.classList.remove('recording');
         return;
     }
 
-    audioBtn.classList.add('recording');
-    AudioRecorder.Record(audio64 => {
+    var success = AudioRecorder.Record(audio64 => {
+        if (audioCancel)
+        {
+            audioCancel = false;
+            return;
+        }
         audioBtn.classList.remove('recording');
         MessageManager.SendMessage(`<br><audio controls src="${audio64}"></audio>`, true);
     });
+
+    if (success)
+    audioBtn.classList.add('recording');
+}
+
+var addedFileHandler = false;
+function SendFile()
+{
+    const fileInput = document.querySelector('#file-input');
+    if (!addedFileHandler)
+    {
+        addedFileHandler = true;
+        fileInput.addEventListener('change', event => {
+            var files = fileInput.files;
+            if (!files)
+                return;
+            
+            for (var fileI = 0; fileI < files.length; fileI ++){
+                var file = files[fileI];
+                let fname = file.name.toLowerCase();
+                FileStorage.UploadFile(Date.now() + file.name, file, snap => {
+                    snap.ref.getDownloadURL().then(url => {
+                        console.log(url);
+                        if (
+                        fname.endsWith('.png')  ||
+                        fname.endsWith('.jpg')  || 
+                        fname.endsWith('.jpeg') || 
+                        fname.endsWith('.bmp'))
+                        {
+                            MessageManager.SendMessage(`<div class="img-sim" style="background-image: url('${url}');"></div>`, true);
+                        }
+                        else
+                        {
+                            MessageManager.SendMessage(`<b>Arquivo</b><br><a href="${url}" download="${fname}" href="_blank"><button class="btn btn-primary">Download</button></a>`, true);
+                        }
+                    });
+                });
+            }
+        });
+    }
+
+    fileInput.click();
+
 }

@@ -10,6 +10,7 @@ var PageResources =
         'css/elements/switch.css': 'style',
         'css/elements/emoji_keyb.css': 'style',
         'css/elements/tooltip.css': 'style',
+        'css/elements/message.css': 'style',
 
         'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js': 'script',
         'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css': 'style',

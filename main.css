@@ -2,6 +2,8 @@ html, body
 {
     padding: 0px;
     margin: 0px;
+    max-width: 100vw;
+    max-height: 100vh;
 }
 
 body
@@ -69,7 +71,7 @@ body
     height: 100%;
     margin: 0px;
     float: left;
-    width: calc(100% - 150px);
+    width: calc(100% - 200px);
     height: 100%;
 }
 
@@ -115,6 +117,14 @@ body
     transition: all .2s;
 }
 
+.img-file
+{
+    background-image: url("img/file.png");
+    background-size: 65%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 @keyframes recording-mic
 {
     0%
@@ -123,7 +133,7 @@ body
     }
     50%
     {
-        background-size: 85%;
+        background-size: 75%;
     }
     100%
     {
@@ -133,7 +143,8 @@ body
 
 .recording
 {
-    background-color: gray;
+    background-image: url("img/cancel.png");
+    /*background-color: gray;*/
     animation-name: recording-mic;
     animation-iteration-count: infinite;
     animation-duration: 2s;
@@ -142,8 +153,8 @@ body
 
 .msg-display
 {
-    padding: 5px;
-    padding-left: 10px;
+    padding: 0px;
+    margin: 0px;
     width: 100%;
     height: calc(100vh - 80px - 50px);
     overflow-y: scroll;

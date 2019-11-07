@@ -37,16 +37,6 @@
     }
 }
 
-audio
-{
-    border-radius: 90px;
-    border-width: 0px;
-    background-color: whitesmoke;
-    border-top-left-radius: 0px;
-    outline: none !important;
-    user-select: none;
-}
-
 .changeColor
 {
     animation-name: changeColor-anim;

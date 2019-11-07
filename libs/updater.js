@@ -1,4 +1,4 @@
-const VERSION = '2.0';
+const VERSION = '1.9.5';
 
 var AllResources =
 [
@@ -16,7 +16,10 @@ var AllResources =
     'libs/messageManager.js',
     'libs/pageLoader.js',
     'libs/register_page.js',
+
     'libs/source_firebase.js',
+    //'https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js',
+
     'libs/theme_uploader.js',
     'libs/themeLoader.js',
     'libs/updater.js',
@@ -38,6 +41,7 @@ var AllResources =
     'css/elements/emoji_keyb.css',
     'css/elements/switch.css',
     'css/elements/tooltip.css',
+    'css/elements/message.css',
 
     //HTML Pages
     'raw_pages/index_raw_page.html',

@@ -22,13 +22,13 @@ const AudioRecorder = {
         {
             if (this.RequestedMic)
                 swal({title: 'Erro', text: 'Microfone desativado!', icon: 'error'});
-            return;
+            return false;
         }
 
         if (!this.Stream)
         {
             swal({title: 'Erro', text: 'Um erro ocorreu.\n(Stream = null)', icon: 'error'});
-            return;
+            return false;
         }
 
         this.Recorder = new MediaRecorder(this.Stream, {
@@ -48,6 +48,7 @@ const AudioRecorder = {
     
             reader.readAsDataURL(e.data);
         }
+        return true;
 
     },
 

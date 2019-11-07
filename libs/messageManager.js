@@ -66,21 +66,10 @@ const sentAudio = new Audio('data:audio/wav;base64,' + LocalResourceCache.GetRes
 
 class msgManager {
     constructor() {
-        this.Sensore = true;
+        this.NameId = '';
         this.Index = 0;
         this.Element = null;
         this.ref = GoogleFirebase.GetReference(GroupManager.CurrentMSGPath());
-        this.ref.on('value', snap => {
-            var msg = snap.val();
-
-            if (!iSend) {
-                recivedAudio.play();
-            }
-            else {
-                sentAudio.play();
-            }
-            this.ShowMessage(msg);
-        });
     }
 
     ShowMessage(
@@ -97,6 +86,7 @@ class msgManager {
         for (this.Index = this.Index; this.Index < keys.length; this.Index++) {
                 var msg = values[this.Index].msg;
 
+
             var messageElement = document.createElement('span');
 
             this.Element.appendChild(messageElement);
@@ -105,7 +95,11 @@ class msgManager {
 
             messageElement.classList.add('tooltipcontainer');
 
-            messageElement.innerHTML = '<b>' + msg;
+            messageElement.classList.add('message');
+
+            messageElement.innerHTML = msg;
+            
+            var mineMsg = (messageElement.firstElementChild.getAttribute('sender') == this.NameId);
 
             var tooltipDateElement = document.createElement('span');
             tooltipDateElement.classList.add('tooltiptext');
@@ -115,12 +109,17 @@ class msgManager {
 
             messageElement.appendChild(tooltipDateElement);
 
+            var oHtml = messageElement.outerHTML;
+            var classes = 'msg-container';
+            if (mineMsg) classes += ' msg-container-my';
+            messageElement.outerHTML = '<div class="' + classes + '">' + oHtml + '</div>';
+
             //Scroll to bottom
             var scrollingElement = this.Element;
             scrollingElement.scrollTop = scrollingElement.scrollHeight;
 
-            iSend = false;
         }
+        iSend = false;
     }
 
     SetElement(element) {
@@ -142,7 +141,7 @@ class msgManager {
                 return;
             }
             extra1 = '<span class="changeColor">'
-            extra2 = ' - Administrador&#10003;</span>';
+            extra2 = '&#10003;</span>';
         }
         else if (!allowHtml) // if not admin, prevent HTML
         {
@@ -154,7 +153,9 @@ class msgManager {
                 );
         }
 
-        var msgStr = extra1 + GoogleFirebase.CurrentUser.displayName + extra2 + ':</b>&nbsp;' + Message + '<br>';
+
+        var msgStr = '<span class="msg-owner" sender="' + this.NameId + '">' + extra1 + GoogleFirebase.CurrentUser.displayName + extra2 + '</span>' + Message;
+        
         var id = this.Index;
         // console.log("Sending a new message ", msgStr);
         GoogleFirebase.AddItem(GroupManager.CurrentMSGPath() + id, { msg: msgStr, time: Date.now() });
@@ -162,9 +163,22 @@ class msgManager {
     }
 
     Init() {
-        /*if (localStorage.getItem('messages'));else return;
-        this.Element.innerHTML = localStorage.getItem('messages');
-        this.Index = Number(localStorage.getItem('index'));*/
+        var nameId = GoogleFirebase.CurrentUser.displayName;
+        while (nameId.includes(' '))
+            nameId = nameId.replace(' ', '_');
+        this.NameId = nameId;
+
+        this.ref.on('value', snap => {
+            var msg = snap.val();
+
+            if (!iSend) {
+                recivedAudio.play();
+            }
+            else {
+                sentAudio.play();
+            }
+            this.ShowMessage(msg);
+        });
     }
 }
 

@@ -16,6 +16,7 @@ const LocalResourceCache =
     {
         this.HTTPRequest(resUrl, resource => {
             localStorage.setItem(resUrl, resource);
+            if (localStorage.getItem(resUrl) == resource)
             callback(resource);
         });
     },

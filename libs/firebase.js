@@ -125,5 +125,20 @@ class AppFirebase {
     }
 }
 
+const FileStorage =
+{
+    GetReference: function(path)
+    {
+        return firebase.storage().ref(ROOT + path);
+    },
+
+    UploadFile: function(path, file, callback)
+    {
+        this.GetReference(path).put(file, {contentType: file.type}).then(snap => {
+            if(callback) callback(snap);
+        });
+    }
+}
+
 GoogleFirebase = new AppFirebase();
 GoogleFirebase.Begin();
