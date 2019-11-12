@@ -194,6 +194,8 @@ function AudioAction()
     audioBtn.classList.add('recording');
 }
 
+Push.Permission.request(() => {}, () => {});
+
 var addedFileHandler = false;
 function SendFile()
 {
@@ -218,7 +220,7 @@ function SendFile()
                         fname.endsWith('.jpeg') || 
                         fname.endsWith('.bmp'))
                         {
-                            MessageManager.SendMessage(`<div class="img-sim" style="background-image: url('${url}');"></div>`, true);
+                            MessageManager.SendMessage(`<div class="img-sim" style="background-image: url('${url}');" onclick="showImage('${url}');"></div>`, true);
                         }
                         else
                         {
@@ -232,4 +234,20 @@ function SendFile()
 
     fileInput.click();
 
+}
+
+function showImage(url)
+{
+    const imgFs = document.querySelector('.img-fullscreen');
+    const imgRaw = imgFs.firstElementChild;
+
+    imgRaw.setAttribute('style', `background-image: url('${url}');`);
+    //imgRaw.setAttribute('src', url);
+    imgFs.classList.remove('hidden');
+}
+
+function CloseFSImage()
+{
+    const imgFs = document.querySelector('.img-fullscreen');
+    imgFs.classList.add('hidden');
 }

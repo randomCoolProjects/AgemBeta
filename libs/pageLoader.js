@@ -15,6 +15,7 @@ var PageResources =
         'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js': 'script',
         'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css': 'style',
         'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js': 'script',
+        'https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.5/push.js': 'script',
 
         'libs/firebase.js': 'script',
         'libs/firebaseStorage.js': 'script',

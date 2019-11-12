@@ -70,6 +70,7 @@ class msgManager {
         this.Index = 0;
         this.Element = null;
         this.ref = GoogleFirebase.GetReference(GroupManager.CurrentMSGPath());
+        this.Loading = true;
     }
 
     ShowMessage(
@@ -99,20 +100,33 @@ class msgManager {
 
             messageElement.innerHTML = msg;
             
-            var mineMsg = (messageElement.firstElementChild.getAttribute('sender') == this.NameId);
+            var messageSender = messageElement.firstElementChild.getAttribute('sender');
+            var mineMsg = (messageSender == this.NameId);
 
-            var tooltipDateElement = document.createElement('span');
+            /*var tooltipDateElement = document.createElement('span');
             tooltipDateElement.classList.add('tooltiptext');
 
             tooltipDateElement.innerHTML = dateStr;
             tooltipDateElement.classList.add('tooltiptext');
 
-            messageElement.appendChild(tooltipDateElement);
+            messageElement.appendChild(tooltipDateElement);*/
 
             var oHtml = messageElement.outerHTML;
             var classes = 'msg-container';
             if (mineMsg) classes += ' msg-container-my';
             messageElement.outerHTML = '<div class="' + classes + '">' + oHtml + '</div>';
+
+            if (!this.Loading && !mineMsg)
+            {
+                Push.create(messageSender, {
+                    body: messageElement.getElementsByClassName('msg-content')[0].innerHTML,
+                    icon: "/img/AgemChat_Logo.png",
+                    timeout: 3500,
+                    onClick: function() {
+                        console.log(this);
+                    }
+                });
+            }
 
             //Scroll to bottom
             var scrollingElement = this.Element;
@@ -153,8 +167,7 @@ class msgManager {
                 );
         }
 
-
-        var msgStr = '<span class="msg-owner" sender="' + this.NameId + '">' + extra1 + GoogleFirebase.CurrentUser.displayName + extra2 + '</span>' + Message;
+        var msgStr = '<span class="msg-owner" sender="' + this.NameId + '">' + extra1 + GoogleFirebase.CurrentUser.displayName + extra2 + '</span><span class="msg-content">' + Message + '</span>';
         
         var id = this.Index;
         // console.log("Sending a new message ", msgStr);
@@ -164,8 +177,6 @@ class msgManager {
 
     Init() {
         var nameId = GoogleFirebase.CurrentUser.displayName;
-        while (nameId.includes(' '))
-            nameId = nameId.replace(' ', '_');
         this.NameId = nameId;
 
         this.ref.on('value', snap => {
@@ -178,6 +189,7 @@ class msgManager {
                 sentAudio.play();
             }
             this.ShowMessage(msg);
+            this.Loading = false;
         });
     }
 }

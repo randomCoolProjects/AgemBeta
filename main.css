@@ -163,9 +163,8 @@ body
 
 .hidden
 {
-  opacity: 0;
-  width: 0px;
-  height: 0px;
+    display: none !important;
+    opacity: 0;
 }
 
 .action-btn

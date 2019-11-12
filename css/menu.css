@@ -5,6 +5,15 @@
 	min-height: 80px;
 }
 
+.navbar
+{
+	z-index: 100;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	
+}
+
 .nav li {
 	display: inline;
 	color: white;

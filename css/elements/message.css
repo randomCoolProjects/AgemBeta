@@ -33,6 +33,14 @@
     border-width: 0px !important;
     background-color: lightgray;
     max-width: 70%;
+    /*overflow: hidden;*/
+}
+
+.message audio
+{
+    outline: none;
+    user-select: none;
+    background-color: transparent;
 }
 
 .img-sim
@@ -45,20 +53,50 @@
     background-position: center;
 }
 
-.message audio
-{
-    outline: none;
-    user-select: none;
-    background-color: transparent;
-}
-
-/*.message .img-sim
+.message .img-sim
 {
     display: block;
     margin: 0px;
     padding: 0px;
-    max-width: 60%;
-}*/
+    /*width: 50vw;*/
+    max-height: 50%;
+    
+}
+
+.img-fullscreen
+{
+    position: absolute;
+    z-index: 100000;
+    left: 0px;
+    top: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    display: inline-block;
+}
+
+.img-fullscreen > .img-sim
+{
+    display: inline-block;
+    width: 100vw;
+    height: 100vh;
+    /*transform: translateY(50%);*/
+}
+
+.img-fullscreen > button
+{
+    position: absolute;
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    padding: 5px;
+    right: 0px;
+    top: 0px;
+    font-size: 32px;
+    background-color: transparent;
+    color: white;
+    border-width: 0px;
+}
 
 .msg-container-my .message
 {

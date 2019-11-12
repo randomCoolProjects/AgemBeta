@@ -61,7 +61,8 @@ var AllResources =
     'https://unpkg.com/sweetalert/dist/sweetalert.min.js',
     'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js',
     'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css',
-    'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js'
+    'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.5/push.js'
 
 ];
 
