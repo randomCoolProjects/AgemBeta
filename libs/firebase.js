@@ -108,6 +108,20 @@ class AppFirebase {
         return firebase.database().ref().child(path);
     }
 
+    GetValueOnce(path, callback)
+    {
+        var ref = this.GetReference(path);
+        var listener = ref.on('value', snap => {
+            ref.off('value', listener);
+            callback(snap.val());
+        });
+    }
+
+    OrderByKey(path)
+    {
+        this.GetReference(path).orderByKey();
+    }
+
     EmailToPath(email)
     {
         var userEmail = email;

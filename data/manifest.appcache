@@ -1,0 +1,31 @@
+CACHE MANIFEST
+# 2010-06-18:v2
+
+CACHE:
+../index.html
+../groups.html
+../marketplace.html
+../updates.html
+../login.html
+../register.html
+../libs/iexplore.js
+../libs/localCache.js
+../img/AgemChat_Logo.png
+../img/add-on.png
+../img/loading.png
+../img/logout.png
+../img/groups.png
+../img/error-fix.png
+../img/send.png
+../img/avatar.png
+../img/cancel.png
+../img/microphone.png
+../img/file.png
+
+NETWORK:
+../libs/online.js
+
+FALLBACK:
+*.html ../index.html
+../favicon.png ../img/AgemChat_Logo.png
+../favicon.ico ../img/AgemChat_Logo.png

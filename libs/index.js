@@ -1,3 +1,4 @@
+if (online === undefined) var online = false;
 var EmKeyboard;
 var emailBanned;
 var bannedBecause;
@@ -25,10 +26,19 @@ document.addEventListener("DOMContentLoaded", function (event) {
         document.title = `${grp} | AgemChat`;
         document.querySelector('#curr_grp').innerHTML = grp;
     }
+    if (!online)
+    {
+        document.body.classList.remove("loading");
+        stopLoading();
+        MessageManager.SetElement('messages');
+        MessageManager.Init('OFFLINE');
+        return;
+    }
     var _msg_show = false;
     GoogleFirebase.OnUserAuth = function () {
-        if (GoogleFirebase.CurrentUser) {
+        if (GoogleFirebase.CurrentUser || !online) {
             document.body.classList.remove("loading");
+            if (!online) return;
             var currEmail = GoogleFirebase.CurrentUser.email;
             var ref = GoogleFirebase.GetReference(ROOT + 'adminUser');
             ref.on('value', snap => {
@@ -187,14 +197,28 @@ function AudioAction()
             return;
         }
         audioBtn.classList.remove('recording');
-        MessageManager.SendMessage(`<br><audio controls src="${audio64}"></audio>`, true);
+        MessageManager.SendMessage(`<audio controls src="${audio64}"></audio>`, true);
     });
 
     if (success)
     audioBtn.classList.add('recording');
 }
 
-Push.Permission.request(() => {}, () => {});
+const applicationServerPublicKey = 'BOimCQNDphve_9rvobz5ioA5hGIE3Dc1Rfcub6BQpDBXmiSGwTR8qJBUcQRz7Gi6nL4nGR7p4XuQ2Cl0rBytPig';
+
+Push.Permission.request(() => {
+    console.log('NOTF: Ok');
+    //Notification Allowed
+    navigator.serviceWorker.register('libs/service-workers/notf-sw.js')
+    .then(function(swReg) {
+        console.log('Service Worker is registered', swReg);
+
+        swRegistration = swReg;
+    })
+    .catch(function(error) {
+        console.error('Service Worker Error', error);
+    });
+}, () => {});
 
 var addedFileHandler = false;
 function SendFile()

@@ -26,6 +26,7 @@ var PageResources =
         'libs/htmlFormatter.js': 'script',
         'libs/imageEncoder.js': 'script',
         'libs/audioRecorder.js': 'script',
+        'libs/serviceManager.js': 'script',
         'libs/index.js': 'script',
     },
     'groups.html': {

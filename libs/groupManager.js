@@ -1,7 +1,6 @@
 const GroupManager =
 {
-    CurrentGroup: (localStorage.getItem('currentGroup') ?
-        localStorage.getItem('currentGroup') : 'Global'),
+    CurrentGroup: (localStorage.getItem('currentGroup') || 'Global'),
 
     CurrentGroupPath: function (group) {
         if (group) return MSGPATH + group + '/';

@@ -1,4 +1,4 @@
-const VERSION = '1.9.5';
+const VERSION = '1.9.6';
 
 var AllResources =
 [
@@ -28,6 +28,7 @@ var AllResources =
     'libs/groupsPage.js',
     'libs/admin.js',
     'libs/audioRecorder.js',
+    'libs/serviceManager.js',
 
     //css
     'main.css',
