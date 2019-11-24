@@ -390,6 +390,12 @@ if (ONLINE && !location.href.includes('login.html') && !location.href.includes('
 
         Init: function () {
             this.RequestPermission();
+            navigator.serviceWorker.register('./firebase-messaging-sw.js')
+            .then((registration) => {
+            messaging.useServiceWorker(registration);
+
+            // Request permission and get token.....
+            });
             messaging.onMessage = this.OnMessage;
         },
 
