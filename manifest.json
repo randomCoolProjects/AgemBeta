@@ -3,18 +3,18 @@
     "name": "AgemChat | Chat Gratuíto",
     "icons": [
       {
-        "src": "/img/icons/192.png",
+        "src": "./img/icons/192.png",
         "type": "image/png",
         "sizes": "192x192"
       },
       {
-        "src": "../img/icons/512.png",
+        "src": "./img/icons/512.png",
         "type": "image/png",
         "sizes": "512x512"
       }
     ],
     "orientation": "landscape",
-    "start_url": "/index.html",
+    "start_url": "./index.html",
     "background_color": "#e6e6e6",
     "display": "standalone",
     "theme_color": "#e6e6e6"
