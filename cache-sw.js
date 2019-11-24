@@ -34,10 +34,10 @@ const staticResources = [
 
     //3rd party:
 
-    './https://unpkg.com/sweetalert/dist/sweetalert.min.js',
-    './https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js',
-    './https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js',
-    './https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css',
+    'https://unpkg.com/sweetalert/dist/sweetalert.min.js',
+    'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js',
+    'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js',
+    'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css',
 
 ];
 
