@@ -139,7 +139,7 @@ function CacheClear(warn = true)
     location.href = 'update.html';
 }
 
-var page_src = location.pathname;
+var page_src = location.pathname.replace('/AgemBeta/', '').replace('/AgemChat/', '');
 
 if (page_src == '/') page_src = 'index.html';
 if (page_src[0] == '/') page_src = page_src.substring(1);
