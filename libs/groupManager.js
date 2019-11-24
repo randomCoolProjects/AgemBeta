@@ -1,6 +1,6 @@
 const GroupManager =
 {
-    CurrentGroup: (localStorage.getItem('currentGroup') || 'Global'),
+    CurrentGroup: (sessionStorage.getItem('currentGroup') || 'Global'),
 
     CurrentGroupPath: function (group) {
         if (group) return MSGPATH + group + '/';
@@ -103,7 +103,7 @@ const GroupManager =
                         if (typeof MessageManager !== 'undefined') {
                             MessageManager.ref = GoogleFirebase.GetReference(this.CurrentGroupPath());
                         }
-                        localStorage.setItem('currentGroup', name);
+                        sessionStorage.setItem('currentGroup', name);
                         callback(true);
                     }
                     else {

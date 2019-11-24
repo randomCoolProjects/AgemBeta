@@ -3,8 +3,8 @@ var PageResources =
 {
     'index.html': {
         'libs/source_firebase.js': 'script',
-        'https://unpkg.com/sweetalert/dist/sweetalert.min.js': 'script',
-        'main.css': 'style',
+        'https://unpkg.com/sweetalert/dist/sweetalert.min.js': ['script', {async: true}],
+        'css/main.css': 'style',
         'css/menu.css': 'style',
         'css/index.css': 'style',
         'css/elements/switch.css': 'style',
@@ -12,17 +12,19 @@ var PageResources =
         'css/elements/tooltip.css': 'style',
         'css/elements/message.css': 'style',
 
-        'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js': 'script',
+        'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js': ['script', {async: true}],
         'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css': 'style',
-        'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js': 'script',
-        'https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.5/push.js': 'script',
+        'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js': ['script', {async: true}],
+        'https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.5/push.js': ['script', {async: true}],
 
+        'libs/fbconfig.js': 'script',
+        'libs/environment.js': 'script',
         'libs/firebase.js': 'script',
         'libs/firebaseStorage.js': 'script',
         'libs/groupManager.js': 'script',
         'libs/messageManager.js': 'script',
-        'libs/emoji_database.js': 'script',
-        'libs/updater.js': 'script',
+        'libs/emoji_database.js': ['script', {async: true}],
+        'libs/updater.js': ['script', {async: true}],
         'libs/htmlFormatter.js': 'script',
         'libs/imageEncoder.js': 'script',
         'libs/audioRecorder.js': 'script',
@@ -32,7 +34,7 @@ var PageResources =
     'groups.html': {
         'libs/source_firebase.js': 'script',
         'https://unpkg.com/sweetalert/dist/sweetalert.min.js': 'script',
-        'main.css': 'style',
+        'css/main.css': 'style',
         'css/menu.css': 'style',
         'css/groups.css': 'style',
 
@@ -40,6 +42,8 @@ var PageResources =
         'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css': 'style',
         'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js': 'script',
 
+        'libs/fbconfig.js': 'script',
+        'libs/environment.js': 'script',
         'libs/firebase.js': 'script',
         'libs/firebaseStorage.js': 'script',
         'libs/groupManager.js': 'script',
@@ -49,24 +53,30 @@ var PageResources =
     },
     'login.html': {
         'libs/source_firebase.js': 'script',
-        'main.css': 'style',
+        'css/main.css': 'style',
         'css/login.css': 'style',
         'https://unpkg.com/sweetalert/dist/sweetalert.min.js': 'script',
         'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js': 'script',
         'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css': 'style',
         'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js': 'script',
+
+        'libs/fbconfig.js': 'script',
+        'libs/environment.js': 'script',
         'libs/firebase.js': 'script',
         'libs/imageEncoder.js': 'script',
         'libs/login_page.js': 'script',
     },
     'register.html': {
         'libs/source_firebase.js': 'script',
-        'main.css': 'style',
+        'css/main.css': 'style',
         'css/login.css': 'style',
         'https://unpkg.com/sweetalert/dist/sweetalert.min.js': 'script',
         'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js': 'script',
         'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css': 'style',
         'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js': 'script',
+
+        'libs/fbconfig.js': 'script',
+        'libs/environment.js': 'script',
         'libs/firebase.js': 'script',
         'libs/imageEncoder.js': 'script',
         'libs/register_page.js': 'script',
@@ -74,7 +84,7 @@ var PageResources =
     'marketplace.html': {
         'libs/source_firebase.js': 'script',
         'https://unpkg.com/sweetalert/dist/sweetalert.min.js': 'script',
-        'main.css': 'style',
+        'css/main.css': 'style',
         'css/menu.css': 'style',
         'css/marketplace.css': 'style',
         'css/index.css': 'style',
@@ -85,6 +95,8 @@ var PageResources =
         'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css': 'style',
         'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js': 'script',
 
+        'libs/fbconfig.js': 'script',
+        'libs/environment.js': 'script',
         'libs/firebase.js': 'script',
         'libs/themeLoader.js': 'script',
         'libs/marketplace.js': 'script'
@@ -92,7 +104,7 @@ var PageResources =
     'theme_upload.html': {
         'libs/source_firebase.js': 'script',
         'https://unpkg.com/sweetalert/dist/sweetalert.min.js': 'script',
-        'main.css': 'style',
+        'css/main.css': 'style',
         'css/menu.css': 'style',
         'css/login.css': 'style',
         'css/marketplace.css': 'style',
@@ -104,6 +116,8 @@ var PageResources =
         'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css': 'style',
         'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js': 'script',
 
+        'libs/fbconfig.js': 'script',
+        'libs/environment.js': 'script',
         'libs/firebase.js': 'script',
         'libs/theme_uploader.js': 'script',
     },
@@ -111,7 +125,7 @@ var PageResources =
     'updates.html': {
         'libs/source_firebase.js': 'script',
         'https://unpkg.com/sweetalert/dist/sweetalert.min.js': 'script',
-        'main.css': 'style',
+        'css/main.css': 'style',
         'css/menu.css': 'style',
         'css/index.css': 'style',
 
@@ -123,7 +137,7 @@ var PageResources =
     'theme_docs.html': {
         'libs/source_firebase.js': 'script',
         'https://unpkg.com/sweetalert/dist/sweetalert.min.js': 'script',
-        'main.css': 'style',
+        'css/main.css': 'style',
         'css/menu.css': 'style',
         'css/index.css': 'style',
 
@@ -135,9 +149,7 @@ var PageResources =
 
 {
 
-var split = (String)(window.location).split('/');
-var currPage = split[split.length-1];
-if(currPage.length <= 1) currPage = 'index.html';
+var currPage = page_src;
 
 var resources = PageResources[currPage.replace('#', '')];
 

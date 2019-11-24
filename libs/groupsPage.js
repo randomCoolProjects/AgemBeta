@@ -7,11 +7,19 @@ function CreateGroupElement(name, owner) {
     bodyHtml += html;
 }
 
+function transferToGroup(name)
+{
+    localStorage.setItem('currentGroup', name);
+    location.href = 'index.html';
+}
+
 function GotoGroup(name) {
+    if (!ONLINE)
+        transferToGroup(name);
+    else
     if (GroupManager.AcceptedEnter(name, joined => {
         if (joined) {
-            localStorage.setItem('currentGroup', name);
-            location.href = 'index.html';
+            transferToGroup(name);
         }
         else {
             swal({
@@ -44,9 +52,16 @@ function startLoading()
 
 document.addEventListener("DOMContentLoaded", function (event) {
     actionBtn = document.querySelector('.action-btn');
-    actionBtn.addEventListener('click', groupWizard);
     var _msg_show = false;
     GoogleFirebase.OnUserAuth = function () {
+        if (!ONLINE) {
+            DEBUG('Not online');
+            window.clearInterval(interval);
+            windowInterval();
+            actionBtn.classList.add('not-allowed');
+            return;
+        }
+        actionBtn.addEventListener('click', groupWizard);
         if (GoogleFirebase.CurrentUser) {
             document.body.classList.remove("loading");
             var currEmail = GoogleFirebase.CurrentUser.email;
@@ -112,6 +127,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             var bhtm = GroupsElement.innerHTML;
 
             GroupManager.GetJoinedGroups(value => {
+                DEBUG('GROUPS',value)
                 bodyHtml = '';
                 CreateGroupElement('Global', 'AgemChat');
                 if (!value) return;
@@ -124,6 +140,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 GroupsElement.innerHTML = bhtm + bodyHtml;
             });
 
+            if (ONLINE)
             GroupManager.CheckEnterRequests();
         }
         stopLoading();

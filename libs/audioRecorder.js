@@ -40,13 +40,14 @@ const AudioRecorder = {
     
         this.Recorder.ondataavailable = (e) => {
             // Converting audio blob to base64
-            let reader = new FileReader()
+            /*let reader = new FileReader()
             reader.onloadend = () => {
                 // You can upload the base64 to server here.
                 callback(reader.result);
             }
     
-            reader.readAsDataURL(e.data);
+            reader.readAsDataURL(e.data);*/
+            callback(e.data);
         }
         return true;
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<link rel="manifest" href="manifest.json">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,10 +10,9 @@
     <script src="libs/updater.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" async></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"></link>
-    <link rel="stylesheet" href="main.css"></link>
+    <link rel="stylesheet" href="css/main.css"></link>
 </head>
 <body>
     <style>
@@ -51,6 +51,23 @@
     </center>
 </body>
 <script>
+    if (!ONLINE)
+    {
+        if (typeof swal == 'function')
+        {
+            swal('Você precisa estar conectado à internet para atualizar!', 'Sem conexão', 'error')
+            .then(() => {
+                location.href = 'index.html?offline=true';
+            });
+        }
+        else
+        {
+            alert('Você precisa estar conectado à internet para atualizar!');
+            location.href = 'index.html?offline=true';
+        }
+    }
+    else
+    {
     let perc = 0;
 
     var load_interval = window.setInterval(() => {
@@ -85,6 +102,7 @@
             }, 1000);
         }
     });
+}
 
 }
 </script>

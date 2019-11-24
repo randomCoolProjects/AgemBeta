@@ -1,6 +1,5 @@
 const fireStorage = 
 {
-
     isLoggedIn: function()
     {
         if (GoogleFirebase.CurrentUser && GoogleFirebase.CurrentUser.email)
@@ -20,25 +19,12 @@ const fireStorage =
             });
             return;
         }
-        GoogleFirebase.AddItem(ROOT + 'usrdata/' +
-            GoogleFirebase.EmailToPath(
-                GoogleFirebase.CurrentUser.email
-            ) + '/' + item,
-            value
-        )
+        GoogleFirebase.AddItem(CacheParser.ProcessPath(Sys.Parse('%USRDATA%')) + item, value);
     },
 
     getItem: function(item, callback)
     {
-        var ref = GoogleFirebase.GetReference(ROOT + 'usrdata/' +
-        GoogleFirebase.EmailToPath(
-            GoogleFirebase.CurrentUser.email
-        ) + '/' + item);
-
-        var listener = ref.on('value', snap => {
-            ref.off('value', listener);
-            callback(snap.val());
-        });
+        GoogleFirebase.GetValueOnce(CacheParser.ProcessPath(Sys.Parse('%USRDATA%')) + item, callback);
     },
 
     clear: function()

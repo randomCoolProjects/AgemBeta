@@ -1,71 +1,13 @@
 const VERSION = '1.9.6';
 
-var AllResources =
-[
-    //scripts:
-    'libs/admin.js',
-    'libs/emoji_database.js',
-    'libs/firebase.js',
-    'libs/htmlFormatter.js',
-    'libs/iexplore.js',
-    'libs/imageEncoder.js',
-    'libs/index.js',
-    'libs/localCache.js',
-    'libs/login_page.js',
-    'libs/marketplace.js',
-    'libs/messageManager.js',
-    'libs/pageLoader.js',
-    'libs/register_page.js',
+var AllResources = LocalResourceCache.GetResource('data/resources.json');
 
-    'libs/source_firebase.js',
-    //'https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js',
-
-    'libs/theme_uploader.js',
-    'libs/themeLoader.js',
-    'libs/updater.js',
-    'libs/groupManager.js',
-    'libs/firebaseStorage.js',
-    'libs/groupsPage.js',
-    'libs/admin.js',
-    'libs/audioRecorder.js',
-    'libs/serviceManager.js',
-
-    //css
-    'main.css',
-    'css/index.css',
-    'css/login.css',
-	  'css/marketplace.css',
-    'css/menu.css',
-    'css/groups.css',
-    
-    //css/elements
-    'css/elements/emoji_keyb.css',
-    'css/elements/switch.css',
-    'css/elements/tooltip.css',
-    'css/elements/message.css',
-
-    //HTML Pages
-    'raw_pages/index_raw_page.html',
-    'raw_pages/login_raw_page.html',
-    'raw_pages/marketplace_raw_page.html',
-    'raw_pages/register_raw_page.html',
-    'raw_pages/theme_docs_raw_page.html',
-    'raw_pages/theme_upload_raw_page.html',
-    'raw_pages/updates_raw_page.html',
-    'raw_pages/groups_raw_page.html',
-
-    //audio
-    'audio/notf.base64',
-    'audio/sent.base64',
-
-    //third party
-    'https://unpkg.com/sweetalert/dist/sweetalert.min.js',
-    'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js',
-    'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css',
-    'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.5/push.js'
-
-];
+if(!AllResources)
+fetch('data/resources.json').then(response => {
+  response.text().then(txt => {
+    AllResources = JSON.parse(txt);
+  })
+})
 
 function DownloadLastUpdate(callback)
 {

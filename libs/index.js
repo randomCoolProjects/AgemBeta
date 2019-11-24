@@ -1,4 +1,3 @@
-if (online === undefined) var online = false;
 var EmKeyboard;
 var emailBanned;
 var bannedBecause;
@@ -19,6 +18,19 @@ function startLoading() {
     document.querySelector('.loading-anim').classList.remove('hidden');
 }
 
+window.addEventListener('load', e => {
+    try
+    {
+        navigator.serviceWorker.register('/cache-sw.js').then(e => {
+            console.log('SW ok!');
+        });
+    }
+    catch
+    {
+        console.error('Error while registering service worker!');
+    }
+});
+
 document.addEventListener("DOMContentLoaded", function (event) {
     {
         var grp = localStorage.getItem('currentGroup');
@@ -26,19 +38,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
         document.title = `${grp} | AgemChat`;
         document.querySelector('#curr_grp').innerHTML = grp;
     }
-    if (!online)
-    {
-        document.body.classList.remove("loading");
-        stopLoading();
-        MessageManager.SetElement('messages');
-        MessageManager.Init('OFFLINE');
-        return;
-    }
     var _msg_show = false;
     GoogleFirebase.OnUserAuth = function () {
-        if (GoogleFirebase.CurrentUser || !online) {
-            document.body.classList.remove("loading");
-            if (!online) return;
+        if (!ONLINE){
+            window.clearInterval(interval);
+            windowInterval();
+             return;
+        }
+        if (GoogleFirebase.CurrentUser) {
             var currEmail = GoogleFirebase.CurrentUser.email;
             var ref = GoogleFirebase.GetReference(ROOT + 'adminUser');
             ref.on('value', snap => {
@@ -97,9 +104,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
             canSendMessages = false;
         }
         if (canSendMessages) {
-            var messageInputElement = document.querySelector('#msg');
-            messageInputElement.removeAttribute('readonly');
-            messageInputElement.classList.remove('not-allowed');
+            if (ONLINE) {
+                var messageInputElement = document.querySelector('#msg');
+                messageInputElement.removeAttribute('readonly');
+                var notAlloweds = document.getElementsByClassName('not-allowed');
+                for (var i = 0; i < notAlloweds.length; i ++){
+                    var element = notAlloweds[i];
+                    element.classList.remove('not-allowed');
+                }
+            }
             MessageManager.Init();
 
         }
@@ -127,15 +140,13 @@ function SendMessage() {
 }
 
 function KeyboardLoad() {
-    var len = Object.keys(emojis).length;
-    for (var i = 0; i < len; i++) {
-        var emoji = emojis[i];
+    for (var i = 0; i < cp_len; i++) {
+        var emoji = getEmoji(i);
         var el = document.createElement('button');
-        var html_code = emoji.html.split(';')[0] + ';';
         EmKeyboard.appendChild(el);
         el.classList.add('emoji_button');
-        el.innerHTML = html_code;
-        el.setAttribute('onclick', 'document.querySelector("#msg").value += "' + emoji.emoji + '";');
+        el.innerHTML = emoji;
+        el.setAttribute('onclick', 'document.querySelector("#msg").value += "' + emoji + '";');
     }
     EmKeyboard.addEventListener('mouseover', function () {
         mouseOnKeyboard = true;
@@ -190,35 +201,28 @@ function AudioAction()
         return;
     }
 
-    var success = AudioRecorder.Record(audio64 => {
+    var success = AudioRecorder.Record(audioBlob => {
         if (audioCancel)
         {
             audioCancel = false;
             return;
         }
         audioBtn.classList.remove('recording');
-        MessageManager.SendMessage(`<audio controls src="${audio64}"></audio>`, true);
+
+        FileStorage.UploadFile(Date.now() + '_audio.webm', audioBlob, snap => {
+
+            snap.ref.getDownloadURL().then(url => {
+                console.log('Audio url:', url);
+                MessageManager.SendMessage(url, true, 'audio');
+            });
+        });
+
     });
 
     if (success)
     audioBtn.classList.add('recording');
 }
 
-const applicationServerPublicKey = 'BOimCQNDphve_9rvobz5ioA5hGIE3Dc1Rfcub6BQpDBXmiSGwTR8qJBUcQRz7Gi6nL4nGR7p4XuQ2Cl0rBytPig';
-
-Push.Permission.request(() => {
-    console.log('NOTF: Ok');
-    //Notification Allowed
-    navigator.serviceWorker.register('libs/service-workers/notf-sw.js')
-    .then(function(swReg) {
-        console.log('Service Worker is registered', swReg);
-
-        swRegistration = swReg;
-    })
-    .catch(function(error) {
-        console.error('Service Worker Error', error);
-    });
-}, () => {});
 
 var addedFileHandler = false;
 function SendFile()
@@ -244,11 +248,11 @@ function SendFile()
                         fname.endsWith('.jpeg') || 
                         fname.endsWith('.bmp'))
                         {
-                            MessageManager.SendMessage(`<div class="img-sim" style="background-image: url('${url}');" onclick="showImage('${url}');"></div>`, true);
+                            MessageManager.SendMessage(url, true, 'image');
                         }
                         else
                         {
-                            MessageManager.SendMessage(`<b>Arquivo</b><br><a href="${url}" download="${fname}" href="_blank"><button class="btn btn-primary">Download</button></a>`, true);
+                            MessageManager.SendMessage(url, true, 'file');
                         }
                     });
                 });

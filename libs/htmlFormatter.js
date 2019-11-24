@@ -39,7 +39,7 @@ const HtmlFormatter =
             var endIndexOf = Message.substring(indexOf).indexOf(' ');
             if (endIndexOf <= 0) endIndexOf = Message.length;
 
-            var link = Message.substring(indexOf, indexOf+endIndexOf);
+            var link = Message.substring(indexOf, indexOf+endIndexOf+1);
 
             var danger = false;
 

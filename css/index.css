@@ -8,11 +8,6 @@
     padding-bottom: 2px;
 }
 
-.not-allowed
-{
-    cursor: not-allowed;
-}
-
 @keyframes changeColor-anim
 {
     0%
@@ -44,21 +39,46 @@
     animation-iteration-count: infinite;
 }
 
+@keyframes disapear
+{
+    0%
+    {
+        width: 4px;
+    }
+    95%
+    {
+        width: 4px;
+    }
+    100%
+    {
+        width: 0px;;
+        max-width: 0px;
+    }
+}
+
 ::-webkit-scrollbar {
-    width: 0px;
-  }
+    width: 4px;
+    animation: disapear 4s;
+    animation-iteration-count: 1;
+}
+
+::-webkit-scrollbar:hover {
+    animation: none !important;
+    animation-name: none;
+}
   
   /* Track */
   ::-webkit-scrollbar-track {
-    background: #ffffff;
+    background: #dddddddc;
   }
   
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #ffffff;
+    background: #c4c4c4;
+    border-radius: 90px;
   }
   
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #ffffff;
+    background: #c4c4c4e5;
   }

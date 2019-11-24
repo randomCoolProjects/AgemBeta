@@ -1,0 +1,16 @@
+{
+    "$GroupManager.CurrentMSGPath()": {
+        "childMask": ["^\\d+$"],
+        "type": "multiple"
+    },
+    "%MSGCOUNT%": {
+        "type": "single",
+        "readTimes": 1
+    },
+    "%USRDATA%groups/":
+    {
+        "childMask": ["[\\s\\S]*"],
+        "type": "multiple",
+        "readTimes": "OFFLINE"
+    }
+}

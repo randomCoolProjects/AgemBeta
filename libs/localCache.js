@@ -1,3 +1,27 @@
+var ONLINE = true;
+if (location.search == '?offline=true')
+ONLINE=false;
+
+if (!ONLINE)
+{
+    try
+    {
+    window.setInterval(() => {
+        fetch('/data/check.txt') // check if online
+        .then(res => {
+            if (res.status == 200)
+                location.href = location.href.replace('?offline=true', '');
+        })
+        .catch(err => {
+            // NOTHING
+        });
+    }, 1250);
+    }
+    catch
+    {
+    }
+}
+
 const LocalResourceCache =
 {
     HTTPRequest: function(url, callback)
@@ -27,12 +51,32 @@ const LocalResourceCache =
         return resource;
     },
 
-    LoadResource: function(resUrl, resourceType)
+    LoadResource: function(resUrl, resType)
     {
+        var isArray = false;
+        var resourceType = resType;
+        if (resourceType != null && resourceType[0].length != 1)
+        {
+            resourceType = resType[0];
+            isArray = true;
+        }
+
         if (!resourceType) resourceType = 'script';
         var resource = this.GetResource(resUrl);
+        if (!resource) return;
         var element = document.createElement(resourceType);
         element.innerHTML = resource;
+        if (isArray)
+        {
+            for (var i = 1; i < resType.length; i ++)
+            {
+                if (i == resType.length) break;
+                var attr = resType[i];
+                console.log(attr);
+                var keys = Object.keys(attr);
+                element.setAttribute(keys[0], attr[keys[0]]);
+            }
+        }
         var head = document.head;
         if (!head) head = document.getElementsByTagName('head')[0];
         head.appendChild(element);
@@ -62,7 +106,7 @@ const LocalResourceCache =
     }
 }
 
-if (!localStorage.getItem('total_files') && !location.href.endsWith('update.html'))
+if (ONLINE && !localStorage.getItem('total_files') && !location.href.replace('?offline=true', '').endsWith('update.html'))
 {
     alert('Você precisa atualizar o APP!\nClique OK para atualizar.');
     localStorage.clear();
@@ -81,8 +125,24 @@ function LoadHtml(url)
 
 function CacheClear(warn = true)
 {
+    if (!ONLINE)
+    {
+        if (!swal)var swal;
+        (swal || alert)('Você só pode fazer log-out quando conectado à internet!', 
+        'Sem conexão', 'error');
+        return;
+    }
+
     if (warn)
     if (!confirm('ATENÇÃO!\nLimpar o cache pode resolver alguns problemas, entretanto, irá restaurar as configurações padrão.'))return;
     localStorage.clear();
     location.href = 'update.html';
 }
+
+var page_src = location.pathname;
+
+if (page_src == '/') page_src = 'index.html';
+if (page_src[0] == '/') page_src = page_src.substring(1);
+console.log(page_src);
+LocalResourceCache.LoadResource('libs/pageLoader.js');
+LoadHtml(page_src);

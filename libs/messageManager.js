@@ -66,30 +66,22 @@ const sentAudio = new Audio('data:audio/wav;base64,' + LocalResourceCache.GetRes
 
 class msgManager {
     constructor() {
-        this.Mode = 'ONLINE';
         this.NameId = '';
         this.Index = 0;
         this.Element = null;
         this.Path = GroupManager.CurrentMSGPath();
         this.Loading = true;
         this.CanCheckForNewMessages = false;
-        this.__count_cache = 0;
     }
 
     GetMessageCount(callback)
     {
-        if (this.Mode == 'OFFLINE')
-        {
-            callback(Number(localStorage.getItem('msgcount') || 0));
+        if (!ONLINE) {
+            callback(Number(CacheParser.GetItemRaw(GroupManager.CurrentGroupPath() + 'msgcount')));
             return;
         }
         GoogleFirebase.GetValueOnce(GroupManager.CurrentGroupPath() + 'msgcount', val => {
             var num = Number(val);
-            if (num != this.__count_cache)
-            {
-                localStorage.setItem(this.Path + 'msgcount', num);
-                this.__count_cache = num;
-            }
             callback(Number(num || 0));
         });
     }
@@ -129,6 +121,7 @@ class msgManager {
              type: 'image|audio|file|text'
          }
         */
+
          const html =
          `<span class="message"><span class="msg-owner" sender="${message.sender}">${message.sender}&nbsp;[${getDateString(message.time)}]`
          + `</span><span class="msg-content">${this.GetFormattedContent(message)}</span></span>`;
@@ -226,7 +219,7 @@ class msgManager {
                 return;
             }
         }
-        else if (!allowHtml) // if not admin, prevent HTML
+        else if ((!allowHtml || !adminScript) && type == 'text') // if not admin, prevent HTML
         {
             Message =
                 HtmlFormatter.FormatResources(
@@ -253,43 +246,16 @@ class msgManager {
 
     GetAllMessages(callback)
     {
-        var cache = new Array();
-        var count = (localStorage.getItem(this.Path + 'msgcount'));
-
-        if (count && localStorage.getItem(this.Path + '0'))
-        {
-            count = Number(count);
-            for (var i = 0; i < count; i ++)
-            {
-                if (i == count) break;
-                cache[i] = JSON.parse(localStorage.getItem(this.Path + i.toString()));
-            }
-            console.log('Loaded messages from cache.', cache);
-            callback(cache);
-        }
-        else
         GoogleFirebase.GetValueOnce(this.Path, msg => {
-            console.log('Loaded messages from database.', msg);
+            DEBUG('Loaded messages from database.', msg);
 
             if (!msg)
             {
                 callback(null);
                 return;
             }
-
-            // Now, write to cache
-            var values = msg;
-            //if (typeof values == Object)values = Object.values(msg);
-            //else values = msg;
-            for (var i = 0; i < values.length; i ++)
-            {
-                if (i == values.length) break;
-                var value = values[i];
-                localStorage.setItem(this.Path + i, JSON.stringify(value))
-            }
             callback(msg);
         });
-        //TODO: load from cache (localStorage)
     }
 
     GetMessage(index, callback)
@@ -300,22 +266,17 @@ class msgManager {
                 callback(null);
                 return null;
             }
-            localStorage.setItem(this.Path + index, JSON.stringify(msg));
             callback(msg);
         });
     }
 
     CheckForErrors(virtualCount, realCount)
     {
-        if (this.Mode == 'ONLINE')
-        if (virtualCount > realCount)
+        if (virtualCount > realCount && ONLINE)
         {
-            localStorage.removeItem(this.Path + 'msgcount');
             console.error('Oh, no');
-            for (var i = 0; i < virtualCount; i ++)
-            {
-                localStorage.removeItem(this.Path + i);
-            }
+            CacheParser.RemoveItem(GroupManager.CurrentGroupPath() + 'msgcount');
+            CacheParser.RemoveItem(this.Path);
             location.reload();
         }
     }
@@ -327,10 +288,10 @@ class msgManager {
 
         this.GetMessageCount(count => {
             this.CheckForErrors(keys.length, count);
+            DEBUG(`Index = ${this.Index}, Msgs = ${keys.length}`);
             for (this.Index = 0; this.Index < keys.length; this.Index++)
             {
                 var message = values[this.Index];
-                console.log('[DisplayMessageArray]',`${this.Index} = ${message}`);
                 if (this.Index == keys.length || !message) break;
                 this.DisplayMessage(message);
             }
@@ -347,7 +308,7 @@ class msgManager {
 
             if (count-1 > this.Index)
             {
-                console.log('MSGREQUEST:',count-1,this.Index);
+                DEBUG('MSGREQUEST:',count-1,this.Index);
                 this.GetMessage(this.Index+1, message => {
                     this.CanCheckForNewMessages = true;
                     if (!message) {
@@ -363,30 +324,23 @@ class msgManager {
         });
     }
 
-    Init(mode) {
+    Init() {
 
-        if (mode) this.Mode = mode;
+        this.NameId = GoogleFirebase.CurrentUser.displayName;
 
         this.GetAllMessages(messages => {
 
-            if (mode == 'OFFLINE')
-            {
-                this.NameId = localStorage.getItem('name-id-cache');
-            }
-
             if (messages)
             {
+                DEBUG('displaying messages...');
                 this.DisplayMessageArray(messages);
                 this.ScrollBottom(true);
             }
 
-            if (mode == 'OFFLINE') {
+            if (!ONLINE) {
+                DEBUG('MsgMgr: Offline');
                 return;
             }
-
-            this.NameId = GoogleFirebase.CurrentUser.displayName;
-            if (localStorage.getItem('name-id-cache') != this.NameId)
-            localStorage.setItem('name-id-cache', this.NameId);
 
             this.CanCheckForNewMessages = true; // Allow checking for new messages
 

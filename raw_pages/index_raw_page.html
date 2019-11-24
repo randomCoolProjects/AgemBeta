@@ -43,6 +43,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <a class="nav-item nav-link" href="marketplace.html"><img id="add-on" width="32"></a>
+                <!--a class="nav-item nav-link" href="#install"><img id="install-pwa" width="32"></a-->
                 <a onclick="logout();" class="nav-item nav-link" href="#"><img id="logout-btn" width="32"></a>
                 <a class="nav-item nav-link" href="groups.html"><img id="groups-btn" width="32"></a>
                 <a class="nav-item nav-link disabled" onclick="CacheClear();" href="#"><img id="cache-clear-btn" width="32"></a>
@@ -50,6 +51,7 @@
         </nav>
         <script> // Page load script
             LocalResourceCache.LoadImageToElement('img/add-on.png', '#add-on');
+            //LocalResourceCache.LoadImageToElement('img/install.png', '#install-pwa');
             LocalResourceCache.LoadImageToElement('img/logout.png', '#logout-btn');
             LocalResourceCache.LoadImageToElement('img/groups.png', '#groups-btn');
             LocalResourceCache.LoadImageToElement('img/error-fix.png', '#cache-clear-btn');
@@ -70,17 +72,17 @@
         <div class="msg-area">
             <input id="msg" class="form-control not-allowed" type="text" placeholder="Send a mesage ..." readonly
                 autofocus onkeydown="if(event.keyCode == 13){$('#send-msg-btn').click();}" autocomplete="off">
-            <button id="send-msg-btn" class="btn send-btn img-send" onclick="SendMessage();">
+            <button id="send-msg-btn" aria-label="Enviar mensagem" class="btn send-btn img-send not-allowed" onclick="SendMessage();">
                 &nbsp;
             </button>
-            <button id="audio-btn" class="btn send-btn img-mic" onclick="AudioAction();">
+            <button id="audio-btn" aria-label="Gravar áudio" class="btn send-btn img-mic not-allowed" onclick="AudioAction();">
                 &nbsp;
             </button>
-            <button id="file-btn" class="btn send-btn img-file" onclick="SendFile();">
+            <button id="file-btn" aria-label="Enviar arquivo" class="btn send-btn img-file not-allowed" onclick="SendFile();">
                 &nbsp;
             </button>
-            <input id="file-input" type="file" class="hidden" multiple>
-            <button id="emoji-btn" class="btn send-btn" onclick="if(canSendMessages)EmojiKeyboard();">
+            <input id="file-input" type="file" class="hidden" multiple hidden aria-hidden="true">
+            <button id="emoji-btn" aria-label="Selecionar emoji" class="btn send-btn not-allowed" onclick="if(canSendMessages)EmojiKeyboard();">
                 &#128515;
             </button>
         </div>

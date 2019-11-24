@@ -1,0 +1,8 @@
+{
+    "ROOT": "$ROOT",
+    "MSGPATH": "$GroupManager.CurrentMSGPath()",
+    "GRPATH": "$CacheParser.ProcessPath(GroupManager.CurrentGroupPath())",
+    "MSGCOUNT": "%GRPATH%msgcount",
+    "EMAIL": "$GoogleFirebase.EmailToPath(GoogleFirebase.CurrentUser.email)",
+    "USRDATA": "%ROOT%usrdata/%EMAIL%/"
+}
