@@ -21,6 +21,7 @@ function startLoading() {
 window.addEventListener('load', e => {
     try
     {
+        DEBUG('./cache-sw');
         navigator.serviceWorker.register('./cache-sw.js').then(e => {
             console.log('SW ok!');
         });
