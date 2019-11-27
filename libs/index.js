@@ -33,6 +33,9 @@ window.addEventListener('load', e => {
 });
 
 document.addEventListener("DOMContentLoaded", function (event) {
+    LocalResourceCache.LoadCustomElement('fullScreenImage', document.body, () => {
+        // FULLSCR_IMG loaded
+    });
     {
         var grp = localStorage.getItem('currentGroup');
         if (!grp) grp = 'Global';
@@ -263,20 +266,4 @@ function SendFile()
 
     fileInput.click();
 
-}
-
-function showImage(url)
-{
-    const imgFs = document.querySelector('.img-fullscreen');
-    const imgRaw = imgFs.firstElementChild;
-
-    imgRaw.setAttribute('style', `background-image: url('${url}');`);
-    //imgRaw.setAttribute('src', url);
-    imgFs.classList.remove('hidden');
-}
-
-function CloseFSImage()
-{
-    const imgFs = document.querySelector('.img-fullscreen');
-    imgFs.classList.add('hidden');
 }

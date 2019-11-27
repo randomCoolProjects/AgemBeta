@@ -2,6 +2,14 @@
     "data/cache.json",
     "data/sysvar.json",
 
+    "elements/share/body.html",
+    "elements/share/script.js",
+    "elements/share/style.css",
+
+    "elements/fullScreenImage/body.html",
+    "elements/fullScreenImage/script.js",
+    "elements/fullScreenImage/style.css",
+
     "libs/fbconfig.js",
     "libs/environment.js",
     "libs/admin.js",

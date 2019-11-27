@@ -82,7 +82,29 @@ const LocalResourceCache =
         head.appendChild(element);
     },
 
-    LoadImage: function(url, callback)
+    CreatedElements: [],
+    LoadCustomElement: async function(elementName, parent, callback)
+    {
+        if (this.CreatedElements[elementName]) return callback();
+
+        this.CreatedElements[elementName] = true;
+
+        if (!parent) parent = document.body;
+
+        this.LoadResource(`elements/${elementName}/style.css`, 'style');
+
+        var html = this.GetResource(`elements/${elementName}/body.html`);
+        var el = document.createElement('div');
+        parent.appendChild(el);
+        el.innerHTML = html;
+
+        this.LoadResource(`elements/${elementName}/script.js`, 'script');
+
+        if (callback) return callback();
+
+    },
+
+    LoadImage: async function(url, callback)
     {
         var data = localStorage.getItem(url);
         if (!data || data.length <= 1) // An image size certain will be more than 1 char (base64)
@@ -97,7 +119,7 @@ const LocalResourceCache =
         callback(data);
     },
 
-    LoadImageToElement: function(imgUrl, querySelector)
+    LoadImageToElement: async function(imgUrl, querySelector)
     {
         var imgE = document.querySelector(querySelector);
         this.LoadImage(imgUrl, img => {

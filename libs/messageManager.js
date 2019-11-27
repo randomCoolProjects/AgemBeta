@@ -177,6 +177,43 @@ class msgManager {
         var element = this.CreateMessageElement(message);
         this.Element.appendChild(element);
 
+        var shareTxt = message.type =='text' ? message.content :
+        (message.type == 'image' ? message.content : '');
+
+        element.setAttribute('share', shareTxt);
+
+        function showShareDialog() {
+            LocalResourceCache.LoadCustomElement('share', document.body, () => {
+                document.querySelector('.share').classList.remove('hidden');
+                SHARE_TEXT = shareTxt;
+            });
+        }
+
+        var timeout = null;
+
+        var clickStart = function(mouse) {
+            DEBUG(mouse.button)
+            if (mouse == 'TOUCH' || mouse.button == 0)
+            timeout = window.setTimeout(() => {
+                showShareDialog();
+            }, 750);
+        }
+
+        var clickEnd = function(mouse) {
+            DEBUG('mouseup!')
+            if (timeout) window.clearTimeout(timeout);
+        }
+
+        element.addEventListener('mousedown', clickStart);
+        element.addEventListener('mouseup', clickEnd);
+
+        element.addEventListener('touchstart', () => {
+            clickStart('TOUCH');
+        });
+        element.addEventListener('touchend', clickEnd);
+
+        
+
         this.ScrollBottom();
 
     }
