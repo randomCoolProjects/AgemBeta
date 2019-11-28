@@ -279,10 +279,12 @@ class AppFirebase {
         if (ONLINE) {
             var ref = firebase.database().ref(path);
             ref.push();
-            ref.set(obj);
+            var v = ref.set(obj);
             ref.push();
             CacheParser.Save(this.Cache, path, obj);
+            return v;
         }
+        return null;
     }
 
     AddFromRef(ref, obj) {
@@ -374,7 +376,6 @@ GoogleFirebase = new AppFirebase();
 GoogleFirebase.Cache = JSON.parse(LocalResourceCache.GetResource('data/cache.json'));
 GoogleFirebase.Begin();
 
-if (ONLINE && !location.href.includes('login.html') && !location.href.includes('register.html')) {
 
     const messaging = firebase.messaging();
     const FBNotification = {
@@ -388,22 +389,32 @@ if (ONLINE && !location.href.includes('login.html') && !location.href.includes('
             });
         },
 
-        Init: function () {
-            navigator.serviceWorker.register('./firebase-messaging-sw.js')
-            .then((registration) => {
-            messaging.useServiceWorker(registration);
-
+        Init: function (reg) {
+            messaging.useServiceWorker(reg);
+                DEBUG('NOTF init ...', reg);
                 this.RequestPermission();
-
-            });
-            messaging.onMessage = this.OnMessage;
         },
-
-        OnMessage: function (payload) {
-            Push.create('test');
-        }
     }
 
-    window.setTimeout(() => FBNotification.Init(), 200);
+var CallNotification = firebase.functions().httpsCallable('addMessage');
 
-}
+// function CallNotification(params)
+// {
+//     var url = 'https://us-central1-online-mega-chat.cloudfunctions.net/addMessage?';
+//     var keys = Object.keys(params);
+//     for (var i = 0; i < keys.length; i ++)
+//     {
+//         var key = keys[i];
+//         url += key + '=' + params[key] + '&';
+//     }
+//     if (url[url.length-1] == '&') url = url.substring(0, url.length-1);
+//     try{
+//     var xhr = new XMLHttpRequest();
+//     xhr.open('GET', url);
+//     xhr.send();
+//     }
+//     catch
+//     {
+
+//     }
+// }

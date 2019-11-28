@@ -158,14 +158,7 @@ class msgManager {
                 {
                     content = '📎 Arquivo';
                 }
-                Push.create('🗨 ' + message.sender, {
-                    body: content,
-                    icon: img,
-                    timeout: 3500,
-                    onClick: function() {
-                        window.focus();
-                    }
-                });
+
             }
 
             if (message.sender == this.NameId)
@@ -192,7 +185,6 @@ class msgManager {
         var timeout = null;
 
         var clickStart = function(mouse) {
-            DEBUG(mouse.button)
             if (mouse == 'TOUCH' || mouse.button == 0)
             timeout = window.setTimeout(() => {
                 showShareDialog();
@@ -200,7 +192,6 @@ class msgManager {
         }
 
         var clickEnd = function(mouse) {
-            DEBUG('mouseup!')
             if (timeout) window.clearTimeout(timeout);
         }
 
@@ -275,7 +266,18 @@ class msgManager {
                 type: type || 'text'
     
             });
-            GoogleFirebase.AddItem(GroupManager.CurrentGroupPath() + 'msgcount', count+1);
+            GoogleFirebase.AddItem(GroupManager.CurrentGroupPath() + 'msgcount', count+1).then(() => {
+                var PARAMS = {
+                    version: ROOT.replace('/', ''),
+                    group: GroupManager.CurrentGroup,
+                    email:
+                    encodeURIComponent(GoogleFirebase.EmailToPath(GoogleFirebase.CurrentUser.email))
+                };
+                DEBUG('Sending NOTF request ...', PARAMS);
+                CallNotification(PARAMS).then((result) => {
+                    DEBUG('MESSAGE SENT', result);
+                });
+            });
         });
 
         GoogleFirebase.OrderByKey(this.Path);

@@ -8,8 +8,10 @@ for (var i = 0; i < elements.length; i++) {
     eval(`var __api_${svc} = "${shareBtn.getAttribute('api')}";`);
     shareBtn.addEventListener('click', (e) => {
         if (!SHARE_TEXT || SHARE_TEXT.length <= 0) {
-            if (typeof swal == 'undefined') var swal;
-            (swal || alert)('Nada a compartilhar!', 'Nenhum texto!', 'error');
+            var meth;
+            if (typeof swal == 'undefined') meth = alert;
+            else meth = swal;
+            meth('Nada a compartilhar!', 'Nenhum texto!', 'error');
             return;
         }
         var api = eval(`__api_${e.target.classList[1]}`);
@@ -19,8 +21,10 @@ for (var i = 0; i < elements.length; i++) {
         }
         else {
             navigator.clipboard.writeText(SHARE_TEXT);
-            if (typeof swal == 'undefined') var swal;
-            (swal || alert)('Texto copiado!', 'Ok', 'success');
+            var meth;
+            if (typeof swal == 'undefined') meth = alert;
+            else meth = swal;
+            meth('Texto copiado!', 'Ok', 'success');
         }
         SHARE_TEXT = '';
        share_element.classList.add('hidden');

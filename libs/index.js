@@ -22,13 +22,13 @@ window.addEventListener('load', e => {
     try
     {
         DEBUG('./cache-sw');
-        navigator.serviceWorker.register('./cache-sw.js').then(e => {
-            console.log('SW ok!');
+        navigator.serviceWorker.register('./main-sw.js').then(reg => {
+            FBNotification.Init(reg);
         });
     }
-    catch
+    catch (ex)
     {
-        console.error('Error while registering service worker!');
+        console.error('Error while registering service worker!', ex);
     }
 });
 
