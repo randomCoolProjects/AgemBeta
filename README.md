@@ -1,4 +1,5 @@
 # AgemChat (Beta)
+Versão BETA do AgemChat
 É um chat online totalmente gratuíto e open souce!
 Teste <a href="https://randomcoolprojects.github.io/AgemBeta/">aqui</a>!
 # Segurança  
